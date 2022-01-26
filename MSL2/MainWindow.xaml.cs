@@ -1535,10 +1535,212 @@ namespace MSL2
                 Dispatcher.Invoke(ReadStdOutput1, new object[] { e.Data });
             }
         }
-        
         private void ReadStdOutputAction1(string msg)
         {
-            
+            frpcOutlog.Text = frpcOutlog.Text + msg + "\n";
+            if (msg.IndexOf("login") + 1 != 0)
+            {
+                if (msg.IndexOf("failed") + 1 != 0)
+                {
+                    frpcOutlog.Text = frpcOutlog.Text + "内网映射桥接失败！\n";
+                    try
+                    {
+                        FRPCMD.Kill();
+                        FRPCMD.CancelOutputRead();
+                        //ReadStdOutput = null;
+                        FRPCMD.OutputDataReceived -= new DataReceivedEventHandler(p_OutputDataReceived1);
+                        setfrpc.IsEnabled = true;
+                        startfrpc.Content = "启动内网映射";
+                    }
+                    catch
+                    {
+                        try
+                        {
+                            FRPCMD.CancelOutputRead();
+                            //ReadStdOutput = null;
+                            FRPCMD.OutputDataReceived -= new DataReceivedEventHandler(p_OutputDataReceived1);
+                            setfrpc.IsEnabled = true;
+                            startfrpc.Content = "启动内网映射";
+                        }
+                        catch
+                        {
+                            setfrpc.IsEnabled = true;
+                            startfrpc.Content = "启动内网映射";
+                        }
+                    }
+                }
+                if (msg.IndexOf("success") + 1 != 0)
+                {
+                    frpcOutlog.Text = frpcOutlog.Text + "登录服务器成功！\n";
+                }
+                if (msg.IndexOf("match") + 1 != 0)
+                {
+                    if (msg.IndexOf("token") + 1 != 0)
+                    {
+                        frpcOutlog.Text = frpcOutlog.Text + "重新连接服务器...\n";
+                        string frpcserver = frpc.Substring(0, frpc.IndexOf(".")) + "*";
+                        int frpcserver1 = frpc.IndexOf(".") + 1;
+                        WebClient MyWebClient = new WebClient();
+                        MyWebClient.Credentials = CredentialCache.DefaultCredentials;
+                        byte[] pageData = MyWebClient.DownloadData("http://115.220.5.81:8081/web/frpcserver.txt");
+                        string pageHtml1 = Encoding.UTF8.GetString(pageData);
+
+                        try
+                        {
+                            int IndexofA = pageHtml1.IndexOf(frpcserver);
+                            string Ru = pageHtml1.Substring(IndexofA + frpcserver1);
+                            string a111 = Ru.Substring(0, Ru.IndexOf("*"));
+                            //MessageBox.Show(a111);
+
+                            WebClient MyWebClient1 = new WebClient();
+                            MyWebClient1.Credentials = CredentialCache.DefaultCredentials;
+                            byte[] pageData1 = MyWebClient1.DownloadData(a111);
+                            string pageHtml = Encoding.UTF8.GetString(pageData1);
+                            string decode = DecodeBase64(pageHtml);
+                            string aaa = File.ReadAllText(AppDomain.CurrentDomain.BaseDirectory + @"MSL2\frpc");
+                            int IndexofA2 = aaa.IndexOf("token=");
+                            string Ru2 = aaa.Substring(IndexofA2);
+                            string a200 = Ru2.Substring(0, Ru2.IndexOf("\n"));
+                            aaa = aaa.Replace(a200, "token=" + decode);
+                            File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + @"MSL2\frpc", aaa);
+                            FRPCMD.CancelOutputRead();
+                            //ReadStdOutput = null;
+                            FRPCMD.OutputDataReceived -= new DataReceivedEventHandler(p_OutputDataReceived1);
+                            StartFrpc();
+                        }
+                        catch
+                        {
+                            MessageBox.Show("内网映射桥接失败！请重试！\n错误代码：" + "Mw000x0001", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                            try
+                            {
+                                FRPCMD.CancelOutputRead();
+                                //ReadStdOutput = null;
+                                FRPCMD.OutputDataReceived -= new DataReceivedEventHandler(p_OutputDataReceived1);
+                                setfrpc.IsEnabled = true;
+                                startfrpc.Content = "启动内网映射";
+                            }
+                            catch
+                            {
+                                setfrpc.IsEnabled = true;
+                                startfrpc.Content = "启动内网映射";
+                            }
+
+                        }
+                    }
+                }
+            }
+            if (msg.IndexOf("reconnect") + 1 != 0)
+            {
+                if (msg.IndexOf("error") + 1 != 0)
+                {
+                    if (msg.IndexOf("token") + 1 != 0)
+                    {
+                        frpcOutlog.Text = frpcOutlog.Text + "重新连接服务器...\n";
+                        string frpcserver = frpc.Substring(0, frpc.IndexOf(".")) + "*";
+                        int frpcserver1 = frpc.IndexOf(".") + 1;
+                        WebClient MyWebClient = new WebClient();
+                        MyWebClient.Credentials = CredentialCache.DefaultCredentials;
+                        byte[] pageData = MyWebClient.DownloadData("http://115.220.5.81:8081/web/frpcserver.txt");
+                        string pageHtml1 = Encoding.UTF8.GetString(pageData);
+
+                        try
+                        {
+                            int IndexofA = pageHtml1.IndexOf(frpcserver);
+                            string Ru = pageHtml1.Substring(IndexofA + frpcserver1);
+                            string a111 = Ru.Substring(0, Ru.IndexOf("*"));
+                            //MessageBox.Show(a111);
+
+                            WebClient MyWebClient1 = new WebClient();
+                            MyWebClient1.Credentials = CredentialCache.DefaultCredentials;
+                            byte[] pageData1 = MyWebClient1.DownloadData(a111);
+                            string pageHtml = Encoding.UTF8.GetString(pageData1);
+                            string decode = DecodeBase64(pageHtml);
+                            string aaa = File.ReadAllText(AppDomain.CurrentDomain.BaseDirectory + @"MSL2\frpc");
+                            int IndexofA2 = aaa.IndexOf("token=");
+                            string Ru2 = aaa.Substring(IndexofA2);
+                            string a200 = Ru2.Substring(0, Ru2.IndexOf("\n"));
+                            aaa = aaa.Replace(a200, "token=" + decode);
+                            File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + @"MSL2\frpc", aaa);
+                            FRPCMD.CancelOutputRead();
+                            //ReadStdOutput = null;
+                            FRPCMD.OutputDataReceived -= new DataReceivedEventHandler(p_OutputDataReceived1);
+                            StartFrpc();
+                        }
+                        catch
+                        {
+                            MessageBox.Show("内网映射桥接失败！请重试！\n错误代码：" + "Mw000x0001", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                            try
+                            {
+                                FRPCMD.CancelOutputRead();
+                                //ReadStdOutput = null;
+                                FRPCMD.OutputDataReceived -= new DataReceivedEventHandler(p_OutputDataReceived1);
+                                setfrpc.IsEnabled = true;
+                                startfrpc.Content = "启动内网映射";
+                            }
+                            catch
+                            {
+                                setfrpc.IsEnabled = true;
+                                startfrpc.Content = "启动内网映射";
+                            }
+
+                        }
+
+                    }
+                }
+            }
+            if (msg.IndexOf("start") + 1 != 0)
+            {
+                if (msg.IndexOf("success") + 1 != 0)
+                {
+                    frpcOutlog.Text = frpcOutlog.Text + "内网映射桥接成功！\n";
+                }
+                if (msg.IndexOf("error") + 1 != 0)
+                {
+                    frpcOutlog.Text = frpcOutlog.Text + "内网映射桥接失败！\n";
+                    try
+                    {
+                        FRPCMD.Kill();
+                        FRPCMD.CancelOutputRead();
+                        //ReadStdOutput = null;
+                        FRPCMD.OutputDataReceived -= new DataReceivedEventHandler(p_OutputDataReceived1);
+                        setfrpc.IsEnabled = true;
+                        startfrpc.Content = "启动内网映射";
+                    }
+                    catch
+                    {
+                        try
+                        {
+                            FRPCMD.CancelOutputRead();
+                            //ReadStdOutput = null;
+                            FRPCMD.OutputDataReceived -= new DataReceivedEventHandler(p_OutputDataReceived1);
+                            setfrpc.IsEnabled = true;
+                            startfrpc.Content = "启动内网映射";
+                        }
+                        catch
+                        {
+                            setfrpc.IsEnabled = true;
+                            startfrpc.Content = "启动内网映射";
+                        }
+                    }
+                    if (msg.IndexOf("port already used") + 1 != 0)
+                    {
+                        frpcOutlog.Text = frpcOutlog.Text + "远程端口被占用，请重新配置！\n";
+                    }
+                    if (msg.IndexOf("port not allowed") + 1 != 0)
+                    {
+                        frpcOutlog.Text = frpcOutlog.Text + "端口被占用，请重新配置！\n";
+                    }
+                    if (msg.IndexOf("proxy name") + 1 != 0)
+                    {
+                        if (msg.IndexOf("already in use") + 1 != 0)
+                        {
+                            frpcOutlog.Text = frpcOutlog.Text + "此QQ号已被占用！请重启电脑再试或联系作者！\n";
+                        }
+                    }
+                    //frpcOutlog.Text = frpcOutlog.Text + "\n端口被占用！请检查是否有进程占用端口或重新配置内网映射！\n";
+                }
+            }
+            frpcOutlog.ScrollToEnd();
         }
 
         private void setfrpc_Click(object sender, RoutedEventArgs e)

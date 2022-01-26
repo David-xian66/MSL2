@@ -1,0 +1,119 @@
+﻿<Window x:Class="MSL2.CreateServer"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MSL2"
+        mc:Ignorable="d"
+        Title="MSL2——欢迎" Height="450" Width="750" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Icon="我的世界开服器_00001.ico" Closing="Window_Closing">
+    <Grid>
+        <TabControl HorizontalAlignment="Left" Height="419" VerticalAlignment="Top" Width="744" Background="#FFFBFBFD">
+            <TabItem x:Name="welcome" Header="欢迎" IsEnabled="False" FontSize="10">
+                <Grid x:Name="welcome1" Background="#FFF1F3F8">
+                    <Label Content="欢迎使用我的世界开服器！&#xA;接下来将通过几个步骤帮您完成服务器设置！" Margin="10,48,21,221" FontSize="36" Foreground="#FFC90000"/>
+                    <Button x:Name="next" Content="下一步" HorizontalAlignment="Left" Margin="311,201,0,0" VerticalAlignment="Top" Width="208" FontWeight="Normal" FontFamily="Microsoft YaHei UI" Click="next_Click" Height="64" FontSize="18"/>
+                    <Image HorizontalAlignment="Left" Height="161" Margin="577,219,0,0" VerticalAlignment="Top" Width="157" Source="我的世界开服器_00001.ico">
+                        <Image.OpacityMask>
+                            <ImageBrush ImageSource="我的世界开服器_00001.ico"/>
+                        </Image.OpacityMask>
+                    </Image>
+                    <Rectangle Fill="#FF1CACF0" HorizontalAlignment="Left" Height="5" VerticalAlignment="Top" Width="54"/>
+                    <Button x:Name="skip" Content="跳过" HorizontalAlignment="Left" Margin="98,201,0,0" VerticalAlignment="Top" Width="208" FontWeight="Normal" FontFamily="Microsoft YaHei UI" Click="skip_Click" Height="64" FontSize="18"/>
+                </Grid>
+            </TabItem>
+            <TabItem x:Name="sserver" Header="服务端及Java" IsEnabled="False" FontSize="10">
+                <Grid>
+                    <Grid x:Name="javagrid" HorizontalAlignment="Left" Height="375" VerticalAlignment="Top" Width="744" Background="#FFF1F3F8">
+                        <Button x:Name="return1" Content="上一步" HorizontalAlignment="Left" Margin="11,200,0,0" VerticalAlignment="Top" Width="87" Click="return1_Click" FontFamily="Microsoft YaHei UI" FontWeight="Normal" Height="39" FontSize="14"/>
+                        <Label x:Name="label3" Content="您有Java吗？" HorizontalAlignment="Left" Margin="28,51,0,0" VerticalAlignment="Top" FontSize="20" Foreground="#FF0097FF"/>
+                        <Button x:Name="selectjava" Content="我有Java" HorizontalAlignment="Left" Margin="393,113,0,0" VerticalAlignment="Top" Width="214" FontFamily="Microsoft YaHei UI" FontWeight="Normal" FontSize="18" Height="65" Click="selectjava_Click"/>
+                        <Button x:Name="downloadjava" Content="我没有Java" HorizontalAlignment="Left" Margin="97,113,0,0" VerticalAlignment="Top" Width="214" FontFamily="Microsoft YaHei UI" FontWeight="Normal" FontSize="18" Height="65" Click="downloadjava_Click"/>
+                        <Button x:Name="next3" Content="下一步" HorizontalAlignment="Left" Margin="185,153,0,0" VerticalAlignment="Top" Width="94" Click="next3_Click" FontFamily="Microsoft YaHei UI" FontWeight="Normal" Height="39" FontSize="14" Visibility="Hidden"/>
+                        <Rectangle Fill="#FF1CACF0" HorizontalAlignment="Left" Height="5" VerticalAlignment="Top" Width="235"/>
+                        <Label x:Name="jvhelp" Content="帮助：不同版本该如何选择Java？ &#xA;1.7及以下 只能使用Java7&#xA;1.8-1.13 只能使用Java8 &#xA;1.14-1.17 可以使用Java8-Java16 &#xA;1.18 必须使用Java17" HorizontalAlignment="Left" Margin="0,278,0,0" VerticalAlignment="Top" FontSize="14" Foreground="#FFFF6800" Visibility="Hidden"/>
+                        <Label Content="Java" HorizontalAlignment="Left" Margin="11,10,0,0" VerticalAlignment="Top" FontSize="22" Foreground="#FFDA0000"/>
+                        <RadioButton x:Name="useJVself" Content="没有配置环境变量，在此选择地址" HorizontalAlignment="Left" Margin="10,122,0,0" VerticalAlignment="Top" FontFamily="Microsoft YaHei UI" Checked="useJVself_Checked" Visibility="Hidden"/>
+                        <TextBox x:Name="txjava" HorizontalAlignment="Left" Height="23" Margin="219,117,0,0" VerticalAlignment="Top" Width="434" FontFamily="Microsoft YaHei UI" IsEnabled="False" MaxLines="1" Visibility="Hidden"/>
+                        <Button x:Name="a0002_Copy" Content="浏览" HorizontalAlignment="Left" Margin="658,117,0,0" VerticalAlignment="Top" Width="76" FontFamily="Microsoft YaHei UI" FontWeight="Normal" Click="a0002_Copy_Click" Visibility="Hidden"/>
+                        <Label x:Name="outlog" Content="" HorizontalAlignment="Left" Margin="56,122,0,0" VerticalAlignment="Top" FontSize="14" RenderTransformOrigin="3.7,-1.679" Visibility="Hidden"/>
+                        <RadioButton x:Name="usejvPath" Content="使用环境变量（使用该选项前请确保已安装Java且已配置好环境变量）" HorizontalAlignment="Left" Margin="10,99,0,0" VerticalAlignment="Top" FontFamily="Microsoft YaHei UI" Checked="usejvPath_Checked" Visibility="Hidden" IsChecked="True"/>
+                        <RadioButton x:Name="usejv8" Content="下载Java8" HorizontalAlignment="Left" Margin="11,91,0,0" VerticalAlignment="Top" FontFamily="Microsoft YaHei UI" Checked="usejv8_Checked" Visibility="Hidden"/>
+                        <RadioButton x:Name="usejv16" Content="下载Java16" HorizontalAlignment="Left" Margin="113,91,0,0" VerticalAlignment="Top" FontFamily="Microsoft YaHei UI" Checked="usejv16_Checked" Visibility="Hidden"/>
+                        <RadioButton x:Name="usejv17" Content="下载Java17" HorizontalAlignment="Left" Margin="225,91,0,0" VerticalAlignment="Top" FontFamily="Microsoft YaHei UI" Checked="usejv17_Checked" Visibility="Hidden"/>
+                        <Label x:Name="label4" Content="在此选择您的Java路径" HorizontalAlignment="Left" Margin="28,51,0,0" VerticalAlignment="Top" FontSize="20" Foreground="#FF0097FF" Visibility="Hidden"/>
+                        <Label x:Name="label5" Content="选择一个版本让开服器为您下载" HorizontalAlignment="Left" Margin="28,51,0,0" VerticalAlignment="Top" FontSize="20" Foreground="#FF0097FF" Visibility="Hidden"/>
+                        <Rectangle HorizontalAlignment="Left" Height="92" Margin="471,275,0,0" Stroke="Red" VerticalAlignment="Top" Width="273"/>
+                        <TextBlock HorizontalAlignment="Left" Margin="481,278,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Text="什么是Java？&#xA;Java是服务器的基础，没有Java服务器也无法开启。" FontSize="20" Width="263" Foreground="Red"/>
+                    </Grid>
+                    <Grid x:Name="servergrid" HorizontalAlignment="Left" Height="375" VerticalAlignment="Top" Width="744" Background="#FFF1F3F8">
+                        <Button x:Name="return2" Content="上一步" HorizontalAlignment="Left" Margin="116,201,0,0" VerticalAlignment="Top" Width="87" Click="return1_Click" FontFamily="Microsoft YaHei UI" FontWeight="Normal" Height="39" FontSize="14" Visibility="Hidden"/>
+                        <Rectangle Fill="#FF1CACF0" HorizontalAlignment="Left" Height="5" VerticalAlignment="Top" Width="145"/>
+                        <TextBox x:Name="txb3" HorizontalAlignment="Left" Height="23" Margin="10,97,0,0" VerticalAlignment="Top" Width="645" FontFamily="Microsoft YaHei UI" MaxLines="1" Visibility="Hidden"/>
+                        <Button x:Name="next2" Content="下一步" HorizontalAlignment="Left" Margin="342,210,0,0" VerticalAlignment="Top" Width="94" Click="next2_Click" FontFamily="Microsoft YaHei UI" FontWeight="Normal" Height="39" FontSize="14" Visibility="Hidden"/>
+                        <Button x:Name="a0002" Content="浏览" HorizontalAlignment="Left" Margin="660,97,0,0" VerticalAlignment="Top" Width="75" Click="a0002_Click" FontFamily="Microsoft YaHei UI" FontWeight="Normal" Visibility="Hidden"/>
+                        <Label x:Name="label2" Content="在此选择服务端" HorizontalAlignment="Left" Margin="28,51,0,0" VerticalAlignment="Top" FontSize="20" Foreground="#FF0097FF" Visibility="Hidden"/>
+                        <Label Content="服务端" HorizontalAlignment="Left" Margin="10,8,0,0" VerticalAlignment="Top" FontSize="22" Foreground="#FFDA0000" Background="{x:Null}"/>
+                        <Label x:Name="label1" Content="您有服务端吗？" HorizontalAlignment="Left" Margin="28,51,0,0" VerticalAlignment="Top" FontSize="20" Foreground="#FF0097FF"/>
+                        <Button x:Name="selectserver" Content="我有服务端" HorizontalAlignment="Left" Margin="393,113,0,0" VerticalAlignment="Top" Width="214" FontFamily="Microsoft YaHei UI" FontWeight="Normal" FontSize="18" Height="65" Click="selectserver_Click"/>
+                        <Button x:Name="downloadserver" Content="我没有服务端" HorizontalAlignment="Left" Margin="97,113,0,0" VerticalAlignment="Top" Width="214" Click="downloadserver_Click" FontFamily="Microsoft YaHei UI" FontWeight="Normal" FontSize="18" Height="65"/>
+                        <Rectangle HorizontalAlignment="Left" Height="92" Margin="471,283,0,0" Stroke="Red" VerticalAlignment="Top" Width="273"/>
+                        <TextBlock HorizontalAlignment="Left" Margin="471,289,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Text="什么是服务端？&#xA;服务端是服务器的核心，没有服务端就无法开服务器。" FontSize="20" Width="263" Foreground="Red"/>
+                        <Image HorizontalAlignment="Left" Height="82" Margin="0,283,0,0" VerticalAlignment="Top" Width="86" Source="我的世界开服器_00001.ico">
+                            <Image.OpacityMask>
+                                <ImageBrush ImageSource="我的世界开服器_00001.ico"/>
+                            </Image.OpacityMask>
+                        </Image>
+                    </Grid>
+                </Grid>
+            </TabItem>
+            <TabItem x:Name="sJVM" Header="开服内存" IsEnabled="False" FontSize="10">
+                <Grid Background="#FFF1F3F8">
+                    <RadioButton x:Name="usedefault" Content="自动分配" HorizontalAlignment="Left" Margin="73,46,0,0" VerticalAlignment="Top" IsChecked="True" Checked="usedefault_Checked" FontFamily="Microsoft YaHei UI"/>
+                    <RadioButton x:Name="useJVM" Content="手动设置" HorizontalAlignment="Left" Margin="73,83,0,0" VerticalAlignment="Top" Checked="useJVM_Checked" FontFamily="Microsoft YaHei UI"/>
+                    <Button x:Name="next4" Content="下一步" HorizontalAlignment="Left" Margin="208,201,0,0" VerticalAlignment="Top" Width="90" Click="next4_Click" FontFamily="Microsoft YaHei UI" FontWeight="Normal" Height="39" FontSize="14"/>
+                    <TextBox x:Name="txb4" HorizontalAlignment="Left" Height="23" Margin="96,120,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsEnabled="False" FontFamily="Microsoft YaHei UI"/>
+                    <TextBox x:Name="txb5" HorizontalAlignment="Left" Height="23" Margin="309,120,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsEnabled="False" FontFamily="Microsoft YaHei UI"/>
+                    <Button x:Name="return3" Content="上一步" HorizontalAlignment="Left" Margin="116,201,0,0" VerticalAlignment="Top" Width="87" Click="return3_Click" FontFamily="Microsoft YaHei UI" FontWeight="Normal" Height="39" FontSize="14"/>
+                    <Label Content="最小" HorizontalAlignment="Left" Margin="59,128,0,0" VerticalAlignment="Top" FontSize="16"/>
+                    <Label Content="最大" HorizontalAlignment="Left" Margin="272,128,0,0" VerticalAlignment="Top" FontSize="16"/>
+                    <Label Content="MB" HorizontalAlignment="Left" Margin="221,128,0,0" VerticalAlignment="Top" FontSize="16"/>
+                    <Label Content="MB" HorizontalAlignment="Left" Margin="434,128,0,0" VerticalAlignment="Top" FontSize="16"/>
+                    <Label Content="在此设置开服需要分配的内存" HorizontalAlignment="Left" Margin="38,16,0,0" VerticalAlignment="Top" FontSize="20" Foreground="#FF0097FF"/>
+                    <Rectangle HorizontalAlignment="Left" Height="127" Margin="409,248,0,0" VerticalAlignment="Top" Width="335" Stroke="Red"/>
+                    <Label Content="手动设置提示：内存分配建议为电脑运行内存的1/4" HorizontalAlignment="Left" Margin="409,248,0,0" VerticalAlignment="Top" FontSize="14" Foreground="Red"/>
+                    <Label Content="手动设置示例：假如电脑运行内存为4096MB&#xA;则可以设置为最小512MB 最大1024MB&#xA;&#xA;也可将最小内存和最大内存设置一致&#xA;如最小1024MB 最大1024MB" HorizontalAlignment="Left" Margin="409,271,0,0" VerticalAlignment="Top" FontSize="16" Foreground="Red"/>
+                    <Rectangle Fill="#FF1CACF0" HorizontalAlignment="Left" Height="5" VerticalAlignment="Top" Width="215"/>
+                    <Image HorizontalAlignment="Left" Height="82" Margin="0,283,0,0" VerticalAlignment="Top" Width="86" Source="我的世界开服器_00001.ico">
+                        <Image.OpacityMask>
+                            <ImageBrush ImageSource="我的世界开服器_00001.ico"/>
+                        </Image.OpacityMask>
+                    </Image>
+                </Grid>
+            </TabItem>
+            <TabItem x:Name="sserverbase" Header="服务器文件夹" FontSize="10" IsEnabled="False">
+                <Grid Background="#FFF1F3F8">
+                    <TextBox x:Name="txb6" HorizontalAlignment="Left" Height="23" Margin="10,77,0,0" VerticalAlignment="Top" Width="653" FontFamily="Microsoft YaHei UI" MaxLines="1"/>
+                    <Button x:Name="done" Content="确定" HorizontalAlignment="Left" Margin="384,154,0,0" VerticalAlignment="Top" Width="92" Click="done_Click" FontFamily="Microsoft YaHei UI" FontWeight="Normal" Height="43" FontSize="14"/>
+                    <Button x:Name="a0003" Content="浏览" HorizontalAlignment="Left" Margin="663,78,0,0" VerticalAlignment="Top" Width="75" Click="a0003_Click" FontFamily="Microsoft YaHei UI" FontWeight="Normal"/>
+                    <Button x:Name="return4" Content="上一步" HorizontalAlignment="Left" Margin="234,154,0,0" VerticalAlignment="Top" Width="90" Click="return4_Click" FontFamily="Microsoft YaHei UI" FontWeight="Normal" Height="43" FontSize="14"/>
+                    <Label Content="在此选择服务器的文件夹，选择好以后，服务器的相关文件将会生成在该文件夹" HorizontalAlignment="Left" Margin="10,34,0,0" VerticalAlignment="Top" FontSize="20" Foreground="#FF0097FF"/>
+                    <Rectangle HorizontalAlignment="Left" Height="86" Margin="397,294,0,0" Stroke="Red" VerticalAlignment="Top" Width="347"/>
+                    <Label Content="选择提示：您选择的路径决定了服务器文件将&#xA;放到何处，请您谨慎选择（最好不要放到桌面&#xA;，否则会在桌面上生成许多文件，使桌面十分&#xA;杂乱）" HorizontalAlignment="Left" Margin="408,294,0,0" VerticalAlignment="Top" FontSize="16" Foreground="Red"/>
+                    <Image HorizontalAlignment="Left" Height="100" Margin="0,275,0,0" VerticalAlignment="Top" Width="100" Source="我的世界开服器_00001.ico"/>
+                    <Rectangle Fill="#FF1CACF0" HorizontalAlignment="Left" Height="5" VerticalAlignment="Top" Width="308" RenderTransformOrigin="0.5,0.5">
+                        <Rectangle.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <SkewTransform/>
+                                <RotateTransform Angle="-0.005"/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </Rectangle.RenderTransform>
+                    </Rectangle>
+                </Grid>
+            </TabItem>
+
+
+        </TabControl>
+    </Grid>
+</Window>

@@ -8,7 +8,7 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>MSL2</RootNamespace>
     <AssemblyName>MSL2</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
@@ -16,6 +16,7 @@
     <Deterministic>true</Deterministic>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -43,9 +44,14 @@
     <ApplicationIcon>我的世界开服器_00001.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DownLoadFile">
+      <HintPath>.\DownLoadFile.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="netstandard" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Management" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
@@ -66,8 +72,35 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="NotifyForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NotifyForm.Designer.cs">
+      <DependentUpon>NotifyForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="pages\About.xaml.cs">
+      <DependentUpon>About.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="pages\Cmdoutlog.xaml.cs">
+      <DependentUpon>Cmdoutlog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="pages\FrpcPage.xaml.cs">
+      <DependentUpon>FrpcPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="pages\Home.xaml.cs">
+      <DependentUpon>Home.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="pages\PluginsgsOrMods.xaml.cs">
+      <DependentUpon>PluginsgsOrMods.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="pages\SettingsPage.xaml.cs">
+      <DependentUpon>SettingsPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="SetFrpc.xaml.cs">
       <DependentUpon>SetFrpc.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SetServerconfig.xaml.cs">
+      <DependentUpon>SetServerconfig.xaml</DependentUpon>
     </Compile>
     <Page Include="CreateServer.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -102,7 +135,35 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="pages\About.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="pages\Cmdoutlog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="pages\FrpcPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="pages\Home.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="pages\PluginsgsOrMods.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="pages\SettingsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="SetFrpc.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SetServerconfig.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -121,6 +182,9 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <EmbeddedResource Include="NotifyForm.resx">
+      <DependentUpon>NotifyForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -141,9 +205,6 @@
     <Resource Include="我的世界开服器_00001.ico" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Downloader">
-      <Version>2.3.2</Version>
-    </PackageReference>
     <PackageReference Include="Microsoft.Windows.SDK.Contracts">
       <Version>10.0.18362.2005</Version>
     </PackageReference>
@@ -164,22 +225,31 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="github_PNG40.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="AiFaDian.png" />
+  </ItemGroup>
+  <ItemGroup>
     <Resource Include="150px-Anvil.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="150px-Book_and_Quill.png" />
+    <Resource Include="150px-Beacon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="150px-Diamond_Revision_2.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="150px-Enchanted_Book.gif" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="150px-Enchanted_Book.png" />
+  </ItemGroup>
+  <ItemGroup>
     <Resource Include="150px-Grass_Block_JE7_BE6.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="150px-Lit_Furnace_JE3_BE2.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="github_PNG40.png" />
+    <Resource Include="150px-Wooden_Pickaxe_JE3_BE3.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

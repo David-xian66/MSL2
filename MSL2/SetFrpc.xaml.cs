@@ -34,7 +34,7 @@ namespace MSL2
             {
                 WebClient MyWebClient = new WebClient();
                 MyWebClient.Credentials = CredentialCache.DefaultCredentials;
-                byte[] pageData = MyWebClient.DownloadData("http://115.220.5.81:8081/web/frpcserver.txt");
+                byte[] pageData = MyWebClient.DownloadData("http://106.12.157.82/web/frpcserver.txt");
                 pageHtml = Encoding.UTF8.GetString(pageData);
             }
             catch
@@ -85,7 +85,7 @@ namespace MSL2
             {
                 WebClient MyWebClient1 = new WebClient();
                 MyWebClient1.Credentials = CredentialCache.DefaultCredentials;
-                Byte[] pageData1 = MyWebClient1.DownloadData("http://115.220.5.81:8081/web/frpcgg.txt");
+                Byte[] pageData1 = MyWebClient1.DownloadData("http://106.12.157.82/web/frpcgg.txt");
                 gonggao.Content = Encoding.UTF8.GetString(pageData1);
             }
             catch
@@ -97,11 +97,14 @@ namespace MSL2
         }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            string frptype;
+            string frptype="";
             if (textBox3.Text == "")
             {
                 try
                 {
+                    int a = listBox1.SelectedIndex;
+                    Random ran = new Random();
+                    int n = ran.Next(int.Parse(listBox4.Items[a].ToString()), int.Parse(listBox5.Items[a].ToString()));
                     if (textBox1.Text == "" || textBox2.Text == "")
                     {
                         MessageBox.Show("出现错误，请确保内网端口和QQ号不为空后再试：" + "w3x2", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -111,22 +114,36 @@ namespace MSL2
                     {
                         frptype = "tcp";
                     }
-                    else
+                    if(useUdp.IsChecked==true)
                     {
                         frptype = "udp";
                     }
-                    int a = listBox1.SelectedIndex;
-                    Random ran = new Random();
-                    int n = ran.Next(int.Parse(listBox4.Items[a].ToString()), int.Parse(listBox5.Items[a].ToString()));
-                    string frpc = "[common]\nserver_port=" + listBox3.Items[a].ToString() + "\nserver_addr=" + listBox2.Items[a].ToString() + "\n" + "token=\n" + "\n[" + textBox2.Text + "]\ntype=" + frptype + "\nlocal_ip=127.0.0.1\nlocal_port=" + textBox1.Text + "\nremote_port=" + n;
-                    FileStream fs = new FileStream(AppDomain.CurrentDomain.BaseDirectory + @"MSL2\frpc", FileMode.Create, FileAccess.Write);
-                    StreamWriter sw = new StreamWriter(fs);
-                    sw.WriteLine(frpc);
-                    sw.Flush();
-                    sw.Dispose();
-                    sw.Close();
-                    fs.Close();
+                    if (useDouble.IsChecked == true)
+                    {
+                        string a100 = textBox1.Text.Substring(0, textBox1.Text.IndexOf("|"));
+                        string Ru2 = textBox1.Text.Substring(textBox1.Text.IndexOf("|"));
+                        string a200 = Ru2.Substring(Ru2.IndexOf("|")+1);
 
+                        string frpc = "[common]\nserver_port=" + listBox3.Items[a].ToString() + "\nserver_addr=" + listBox2.Items[a].ToString() + "\n" + "token=\n" + "\n[" + textBox2.Text + "TCP]\ntype=tcp" + "\nlocal_ip=127.0.0.1\nlocal_port=" + a100 + "\nremote_port=" + n + "\n\n[" + textBox2.Text + "UDP]\ntype=udp" + "\nlocal_ip=127.0.0.1\nlocal_port=" + a200 + "\nremote_port=" + n;
+                        FileStream fs = new FileStream(AppDomain.CurrentDomain.BaseDirectory + @"MSL2\frpc", FileMode.Create, FileAccess.Write);
+                        StreamWriter sw = new StreamWriter(fs);
+                        sw.WriteLine(frpc);
+                        sw.Flush();
+                        sw.Dispose();
+                        sw.Close();
+                        fs.Close();
+                    }
+                    else
+                    {
+                        string frpc = "[common]\nserver_port=" + listBox3.Items[a].ToString() + "\nserver_addr=" + listBox2.Items[a].ToString() + "\n" + "token=\n" + "\n[" + textBox2.Text + "]\ntype=" + frptype + "\nlocal_ip=127.0.0.1\nlocal_port=" + textBox1.Text + "\nremote_port=" + n;
+                        FileStream fs = new FileStream(AppDomain.CurrentDomain.BaseDirectory + @"MSL2\frpc", FileMode.Create, FileAccess.Write);
+                        StreamWriter sw = new StreamWriter(fs);
+                        sw.WriteLine(frpc);
+                        sw.Flush();
+                        sw.Dispose();
+                        sw.Close();
+                        fs.Close();
+                    }
                     string frpc1 = listBox2.Items[a].ToString() + ":" + n;
                     MainWindow.frpc = frpc1.Replace("\r", "");
                     StreamReader reader = File.OpenText(AppDomain.CurrentDomain.BaseDirectory + @"MSL2\config.json");
@@ -148,6 +165,9 @@ namespace MSL2
             {
                 try
                 {
+                    int a = listBox1.SelectedIndex;
+                    Random ran = new Random();
+                    int n = ran.Next(int.Parse(listBox4.Items[a].ToString()), int.Parse(listBox5.Items[a].ToString()));
                     if (textBox1.Text == "" || textBox2.Text == "")
                     {
                         MessageBox.Show("出现错误，请确保内网端口和QQ号不为空后再试：" + "w3x2", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -157,34 +177,67 @@ namespace MSL2
                     {
                         frptype = "tcp";
                     }
-                    else
+                    if (useUdp.IsChecked == true)
                     {
                         frptype = "udp";
                     }
-                    int a = listBox1.SelectedIndex;
-                    Random ran = new Random();
-                    int n = ran.Next(int.Parse(listBox4.Items[a].ToString()), int.Parse(listBox5.Items[a].ToString()));
-                    if (useKcp.IsChecked == true)
+                    if (useDouble.IsChecked == true)
                     {
-                        string frpc = "[common]\nserver_port=" + listBox3.Items[a].ToString() + "\nserver_addr=" + listBox2.Items[a].ToString() + "\n" + "user=" + textBox2.Text + "\n" + "meta_token=" + textBox3.Text + "\nprotocol=kcp\n" + "\n[" + textBox2.Text + "]\ntype=" + frptype + "\nlocal_ip=127.0.0.1\nlocal_port=" + textBox1.Text + "\nremote_port=" + n;
-                        FileStream fs = new FileStream(AppDomain.CurrentDomain.BaseDirectory + @"MSL2\frpc", FileMode.Create, FileAccess.Write);
-                        StreamWriter sw = new StreamWriter(fs);
-                        sw.WriteLine(frpc);
-                        sw.Flush();
-                        sw.Dispose();
-                        sw.Close();
-                        fs.Close();
+                        if (useKcp.IsChecked == true)
+                        {
+                            string a100 = textBox1.Text.Substring(0, textBox1.Text.IndexOf("|"));
+                            string Ru2 = textBox1.Text.Substring(textBox1.Text.IndexOf("|"));
+                            string a200 = Ru2.Substring(Ru2.IndexOf("|") + 1);
+
+                            string frpc = "[common]\nserver_port=" + listBox3.Items[a].ToString() + "\nserver_addr=" + listBox2.Items[a].ToString() + "\n" + "user=" + textBox2.Text + "\n" + "meta_token=" + textBox3.Text + "\nprotocol=kcp\n" + "\n[" + textBox2.Text + "TCP]\ntype=tcp"  + "\nlocal_ip=127.0.0.1\nlocal_port=" + a100 + "\nremote_port=" + n + "\n\n[" + textBox2.Text + "UDP]\ntype=udp" + "\nlocal_ip=127.0.0.1\nlocal_port=" + a200 + "\nremote_port=" + n;
+                            FileStream fs = new FileStream(AppDomain.CurrentDomain.BaseDirectory + @"MSL2\frpc", FileMode.Create, FileAccess.Write);
+                            StreamWriter sw = new StreamWriter(fs);
+                            sw.WriteLine(frpc);
+                            sw.Flush();
+                            sw.Dispose();
+                            sw.Close();
+                            fs.Close();
+                        }
+                        else
+                        {
+                            string a100 = textBox1.Text.Substring(0, textBox1.Text.IndexOf("|"));
+                            string Ru2 = textBox1.Text.Substring(textBox1.Text.IndexOf("|") + 1);
+                            string a200 = Ru2.Substring(Ru2.IndexOf("|"));
+
+                            string frpc = "[common]\nserver_port=" + listBox3.Items[a].ToString() + "\nserver_addr=" + listBox2.Items[a].ToString() + "\n" + "user=" + textBox2.Text + "\n" + "meta_token=" + textBox3.Text + "\n" + "\n[" + textBox2.Text + "TCP]\ntype=tcp" + "\nlocal_ip=127.0.0.1\nlocal_port=" + a100 + "\nremote_port=" + n + "\n\n[" + textBox2.Text + "UDP]\ntype=udp"  + "\nlocal_ip=127.0.0.1\nlocal_port=" + a200 + "\nremote_port=" + n;
+                            FileStream fs = new FileStream(AppDomain.CurrentDomain.BaseDirectory + @"MSL2\frpc", FileMode.Create, FileAccess.Write);
+                            StreamWriter sw = new StreamWriter(fs);
+                            sw.WriteLine(frpc);
+                            sw.Flush();
+                            sw.Dispose();
+                            sw.Close();
+                            fs.Close();
+                        }
                     }
                     else
                     {
-                        string frpc = "[common]\nserver_port=" + listBox3.Items[a].ToString() + "\nserver_addr=" + listBox2.Items[a].ToString() + "\n" + "user=" + textBox2.Text + "\n" + "meta_token=" + textBox3.Text + "\n" + "\n[" + textBox2.Text + "]\ntype=" + frptype + "\nlocal_ip=127.0.0.1\nlocal_port=" + textBox1.Text + "\nremote_port=" + n;
-                        FileStream fs = new FileStream(AppDomain.CurrentDomain.BaseDirectory + @"MSL2\frpc", FileMode.Create, FileAccess.Write);
-                        StreamWriter sw = new StreamWriter(fs);
-                        sw.WriteLine(frpc);
-                        sw.Flush();
-                        sw.Dispose();
-                        sw.Close();
-                        fs.Close();
+                        if (useKcp.IsChecked == true)
+                        {
+                            string frpc = "[common]\nserver_port=" + listBox3.Items[a].ToString() + "\nserver_addr=" + listBox2.Items[a].ToString() + "\n" + "user=" + textBox2.Text + "\n" + "meta_token=" + textBox3.Text + "\nprotocol=kcp\n" + "\n[" + textBox2.Text + "]\ntype=" + frptype + "\nlocal_ip=127.0.0.1\nlocal_port=" + textBox1.Text + "\nremote_port=" + n;
+                            FileStream fs = new FileStream(AppDomain.CurrentDomain.BaseDirectory + @"MSL2\frpc", FileMode.Create, FileAccess.Write);
+                            StreamWriter sw = new StreamWriter(fs);
+                            sw.WriteLine(frpc);
+                            sw.Flush();
+                            sw.Dispose();
+                            sw.Close();
+                            fs.Close();
+                        }
+                        else
+                        {
+                            string frpc = "[common]\nserver_port=" + listBox3.Items[a].ToString() + "\nserver_addr=" + listBox2.Items[a].ToString() + "\n" + "user=" + textBox2.Text + "\n" + "meta_token=" + textBox3.Text + "\n" + "\n[" + textBox2.Text + "]\ntype=" + frptype + "\nlocal_ip=127.0.0.1\nlocal_port=" + textBox1.Text + "\nremote_port=" + n;
+                            FileStream fs = new FileStream(AppDomain.CurrentDomain.BaseDirectory + @"MSL2\frpc", FileMode.Create, FileAccess.Write);
+                            StreamWriter sw = new StreamWriter(fs);
+                            sw.WriteLine(frpc);
+                            sw.Flush();
+                            sw.Dispose();
+                            sw.Close();
+                            fs.Close();
+                        }
                     }
                     string frpc1 = listBox2.Items[a].ToString() + ":" + n;
                     MainWindow.frpc = frpc1.Replace("\r", "");
@@ -219,6 +272,19 @@ namespace MSL2
                 useKcp.IsEnabled = false;
                 textBox3.IsEnabled = false;
             }
+        }
+        private void useTcp_Checked(object sender, RoutedEventArgs e)
+        {
+            textBox1.Text = "25565";
+        }
+        private void useUdp_Checked(object sender, RoutedEventArgs e)
+        {
+            textBox1.Text = "19132";
+        }
+
+        private void useDouble_Checked(object sender, RoutedEventArgs e)
+        {
+            textBox1.Text = "25565|19132";
         }
     }
 }

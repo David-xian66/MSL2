@@ -5,18 +5,23 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MSL2"
         mc:Ignorable="d"
-        Title="MSL2——DownlodServer" Height="463.827" Width="543.575" ResizeMode="NoResize" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen" Icon="我的世界开服器_00001.ico" Closing="Window_Closing">
+        Title="MSL2——DownlodServer" Height="451.827" Width="543.575" ResizeMode="NoResize" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen" Icon="我的世界开服器_00001.ico" Closing="Window_Closing" Background="#FFF1F3F8">
     <Grid>
-        <ListBox x:Name="serverlist1" HorizontalAlignment="Left" Height="331" Margin="10,37,0,0" VerticalAlignment="Top" Width="309" MouseDoubleClick="serverlist_MouseDoubleClick" Background="{x:Null}"/>
-        <ListBox x:Name="serverdownlist" HorizontalAlignment="Left" Height="100" Margin="65,271,0,0" VerticalAlignment="Top" Width="100" Visibility="Hidden"/>
-        <TextBlock x:Name="getservermsg" HorizontalAlignment="Left" Margin="65,175,0,0" TextWrapping="Wrap" Text="加载中，请勿随意移动该窗口..." VerticalAlignment="Top" Height="54" Width="207" FontSize="14"/>
-        <Label x:Name="downmsg1" Content="默认下载目录为软件运行目录的MSL2文件夹，下载服务由 xiaoyu 提供" HorizontalAlignment="Left" Margin="10,399,0,0" VerticalAlignment="Top" Height="26"/>
-        <ComboBox x:Name="serverlist" HorizontalAlignment="Left" Margin="10,6,0,0" VerticalAlignment="Top" Width="309" SelectionChanged="serverlist_SelectionChanged" FontFamily="Microsoft YaHei UI" Background="{x:Null}"/>
-        <TextBox HorizontalAlignment="Left" Height="160" Margin="324,234,0,0" TextWrapping="Wrap" Text="我该如何选择服务端？&#xA;Paper——只可加插件&#xA;Purpur——只可加插件&#xA;Mojang——纯原版，啥也不能加&#xA;MODServer——均可加MOD，有的可加插件" VerticalAlignment="Top" Width="187" Focusable="False" IsReadOnly="True" FontFamily="Microsoft YaHei UI" Background="{x:Null}"/>
-        <Button x:Name="openSpigot" Content="SpigotMc" HorizontalAlignment="Left" Margin="340,93,0,0" VerticalAlignment="Top" Width="144" FontFamily="Microsoft YaHei UI" FontSize="12" Height="42" Background="#33000000" FontWeight="Normal" Click="openSpigot_Click"/>
-        <Button x:Name="openPaper" Content="PaperMc" HorizontalAlignment="Left" Margin="340,140,0,0" VerticalAlignment="Top" Width="144" FontFamily="Microsoft YaHei UI" FontSize="12" Height="42" Background="#33000000" FontWeight="Normal" Click="openPaper_Click"/>
-        <Button x:Name="openMojang" Content="Mojang" HorizontalAlignment="Left" Margin="340,187,0,0" VerticalAlignment="Top" Width="144" FontFamily="Microsoft YaHei UI" FontSize="12" Height="42" Background="#33000000" FontWeight="Normal" Click="openMojang_Click"/>
-        <Label Content="相关网站" HorizontalAlignment="Left" Margin="324,63,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="updatetime" Content="最新下载源更新时间" HorizontalAlignment="Left" Margin="324,10,0,0" VerticalAlignment="Top"/>
+        <Rectangle HorizontalAlignment="Left" Height="326" Margin="9,69,0,0" Stroke="Black" VerticalAlignment="Top" Width="311"/>
+        <ListBox x:Name="serverlist1" HorizontalAlignment="Left" Height="324" Margin="10,70,0,0" VerticalAlignment="Top" Width="309" MouseDoubleClick="serverlist_MouseDoubleClick" Background="{x:Null}"/>
+        <ListBox x:Name="serverdownurl" Visibility="Hidden"/>
+        <ListBox x:Name="serverdownlist" Visibility="Hidden"/>
+        <TextBlock x:Name="getservermsg" HorizontalAlignment="Left" Margin="91,191,0,0" TextWrapping="Wrap" Text="加载中，请耐心等待..." VerticalAlignment="Top" Height="72" Width="154" FontSize="14" Foreground="Red"/>
+        <Label x:Name="downmsg1" Content="默认下载目录为软件运行目录的MSL2文件夹，下载服务由 xiaoyu 提供" HorizontalAlignment="Left" Margin="135,396,0,0" VerticalAlignment="Top" Height="17" Foreground="Black" FontSize="12"/>
+        <ComboBox x:Name="serverlist" HorizontalAlignment="Left" Margin="132,6,0,0" VerticalAlignment="Top" Width="379" SelectionChanged="serverlist_SelectionChanged" FontFamily="Microsoft YaHei UI" Background="{x:Null}"/>
+        <TextBox HorizontalAlignment="Left" Height="117" Margin="338,113,0,0" TextWrapping="Wrap" Text="Paper——只可加插件&#xA;Purpur——只可加插件&#xA;Mojang——纯原版，啥也不能加&#xA;MODServer——均可加MOD，有的可加插件" VerticalAlignment="Top" Width="173" Focusable="False" IsReadOnly="True" FontFamily="Microsoft YaHei UI" Background="{x:Null}"/>
+        <Button x:Name="openSpigot" Content="SpigotMc" HorizontalAlignment="Left" Margin="338,258,0,0" VerticalAlignment="Top" Width="173" FontFamily="Microsoft YaHei UI" FontSize="12" Height="42" Background="#33000000" FontWeight="Normal" Click="openSpigot_Click"/>
+        <Button x:Name="openPaper" Content="PaperMc" HorizontalAlignment="Left" Margin="338,305,0,0" VerticalAlignment="Top" Width="173" FontFamily="Microsoft YaHei UI" FontSize="12" Height="42" Background="#33000000" FontWeight="Normal" Click="openPaper_Click"/>
+        <Button x:Name="openMojang" Content="Mojang" HorizontalAlignment="Left" Margin="338,352,0,0" VerticalAlignment="Top" Width="173" FontFamily="Microsoft YaHei UI" FontSize="12" Height="42" Background="#33000000" FontWeight="Normal" Click="openMojang_Click"/>
+        <Label Content="相关网站" HorizontalAlignment="Left" Margin="324,235,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="updatetime" Content="最新下载源更新时间" HorizontalAlignment="Left" Margin="324,43,0,0" VerticalAlignment="Top"/>
+        <Label Content="在此选择服务端：" HorizontalAlignment="Left" Margin="10,13,0,0" VerticalAlignment="Top" FontSize="16" Width="122" FontWeight="Bold"/>
+        <Label Content="我该如何选择服务端？" HorizontalAlignment="Left" Margin="324,90,0,0" VerticalAlignment="Top"/>
+        <Label Content="双击版本号进行下载：" HorizontalAlignment="Left" Margin="10,45,0,0" VerticalAlignment="Top" FontSize="16" Width="155"/>
     </Grid>
 </Window>

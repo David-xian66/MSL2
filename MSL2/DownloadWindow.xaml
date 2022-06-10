@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MSL2"
         mc:Ignorable="d"
-        Title="MSL2-Downloading..." Height="103.238" Width="397.684" Loaded="Window_Loaded" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowStyle="None" Background="{x:Null}" AllowsTransparency="True">
+        Title="MSL2-Downloading..." Height="103.238" Width="397.684" Loaded="Window_Loaded" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Background="{x:Null}" WindowStyle="None" AllowsTransparency="True">
     <Border x:Name="mainBorder" CornerRadius="5" Margin="5,4,5,5">
         <Border.Background>
             <SolidColorBrush Color="White"/>
@@ -14,9 +14,9 @@
             <DropShadowEffect ShadowDepth="0"/>
         </Border.Effect>
         <Grid>
-            <TextBlock x:Name="infolabel" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="加载中……" VerticalAlignment="Top" FontSize="16"/>
-            <ProgressBar x:Name="pbar" HorizontalAlignment="Left" Height="10" Margin="10,37,0,0" VerticalAlignment="Top" Width="369"/>
-            <Button Content="取消" HorizontalAlignment="Left" Margin="304,52,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click" FontFamily="Microsoft YaHei UI" FontSize="14" FontWeight="Normal"/>
+            <TextBlock x:Name="infolabel" HorizontalAlignment="Left" Margin="10,17,0,0" TextWrapping="Wrap" Text="加载中……" VerticalAlignment="Top"/>
+            <ProgressBar x:Name="pbar" HorizontalAlignment="Left" Height="10" Margin="10,37,0,0" VerticalAlignment="Top" Width="368"/>
+            <Button x:Name="button1" Content="取消" HorizontalAlignment="Left" Margin="303,53,0,0" VerticalAlignment="Top" Width="75" Click="button1_Click" FontFamily="Microsoft YaHei UI" FontSize="14" FontWeight="Normal"/>
             <Label x:Name="taskinfo" Content="当前任务：" HorizontalAlignment="Left" Margin="10,52,0,0" VerticalAlignment="Top"/>
         </Grid>
     </Border>

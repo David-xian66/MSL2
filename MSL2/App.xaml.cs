@@ -13,9 +13,10 @@ namespace MSL2
     /// </summary>
     public partial class App : Application
     {
-        private static System.Threading.Mutex mutex;
+       // private static System.Threading.Mutex mutex;
         protected override void OnStartup(StartupEventArgs e)
         {
+            /*
             mutex = new System.Threading.Mutex(true, "OnlyRun_CRNS");
             if (mutex.WaitOne(0, false))
             {
@@ -25,7 +26,7 @@ namespace MSL2
             {
                 MessageBox.Show("程序已经在运行！", "提示");
                 this.Shutdown();
-            }
+            }*/
         }
     }
 }

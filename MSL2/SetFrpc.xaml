@@ -5,28 +5,30 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MSL2"
         mc:Ignorable="d"
-        Title="SetFrpc" Height="450" Width="843.196" Background="#FFF1F3F8" Loaded="Window_Loaded">
+        Title="SetFrpc" Height="450" Width="843.196" Background="#FFF1F3F8" Loaded="Window_Loaded" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen">
     <Grid>
-        <ListBox x:Name="listBox1" HorizontalAlignment="Left" Height="272" Margin="10,25,0,0" VerticalAlignment="Top" Width="360" SelectionChanged="listBox1_SelectionChanged" Background="White"/>
+        <Rectangle HorizontalAlignment="Left" Height="274" Margin="9,24,0,0" Stroke="Black" VerticalAlignment="Top" Width="362"/>
+        <ListBox x:Name="listBox1" HorizontalAlignment="Left" Height="272" Margin="10,25,0,0" VerticalAlignment="Top" Width="360" SelectionChanged="listBox1_SelectionChanged" Background="{x:Null}"/>
         <ListBox x:Name="listBox2" HorizontalAlignment="Left" Height="100" Margin="110,10,0,0" VerticalAlignment="Top" Width="100" Visibility="Hidden"/>
         <ListBox x:Name="listBox3" HorizontalAlignment="Left" Height="100" Margin="210,10,0,0" VerticalAlignment="Top" Width="100" Visibility="Hidden"/>
         <ListBox x:Name="listBox4" HorizontalAlignment="Left" Height="100" Margin="310,10,0,0" VerticalAlignment="Top" Width="100" Visibility="Hidden"/>
         <ListBox x:Name="listBox5" HorizontalAlignment="Left" Height="100" Margin="410,10,0,0" VerticalAlignment="Top" Width="100" Visibility="Hidden"/>
-        <Button Content="确定" HorizontalAlignment="Left" Margin="726,243,0,0" VerticalAlignment="Top" Width="91" Click="Button_Click" FontFamily="Microsoft YaHei UI" FontWeight="Normal" FontSize="12" Height="39"/>
-        <TextBox x:Name="textBox1" HorizontalAlignment="Left" Height="23" Margin="401,74,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="404" Text="25565" Background="{x:Null}" Foreground="Black"/>
-        <TextBox x:Name="textBox2" HorizontalAlignment="Left" Height="23" Margin="401,135,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="404" Foreground="Black" Background="{x:Null}"/>
-        <Label Content="输入本地端口(必填，默认25565)：" HorizontalAlignment="Left" Margin="375,44,0,0" VerticalAlignment="Top" Foreground="Black"/>
-        <Label Content="输入您的QQ号(必填)：" HorizontalAlignment="Left" Margin="375,105,0,0" VerticalAlignment="Top" Foreground="Black"/>
-        <Label Content="节点列表：" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="16" Foreground="Black"/>
-        <Border HorizontalAlignment="Left" Height="119" Margin="10,302,0,-2" VerticalAlignment="Top" Width="807" CornerRadius="5" Background="White"/>
+        <Button Content="确定" HorizontalAlignment="Left" Margin="726,210,0,0" VerticalAlignment="Top" Width="91" Click="Button_Click" FontFamily="Microsoft YaHei UI" FontWeight="Normal" FontSize="18" Height="72"/>
+        <TextBox x:Name="textBox1" HorizontalAlignment="Left" Height="23" Margin="401,52,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="404" Text="25565" Background="{x:Null}" Foreground="Black"/>
+        <TextBox x:Name="textBox2" HorizontalAlignment="Left" Height="23" Margin="401,107,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="404" Foreground="Black" Background="{x:Null}"/>
+        <Label Content="输入本地端口(必填,Java默认25565,基岩默认19132,双协议用|分割)：" HorizontalAlignment="Left" Margin="375,34,0,0" VerticalAlignment="Top" Foreground="Black"/>
+        <Label Content="输入您的QQ号(必填)：" HorizontalAlignment="Left" Margin="375,89,0,0" VerticalAlignment="Top" Foreground="Black"/>
+        <Label Content="节点列表：" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="16" Foreground="Black" FontWeight="Bold"/>
+        <Border HorizontalAlignment="Left" Height="119" Margin="10,302,0,-2" VerticalAlignment="Top" Width="807" CornerRadius="5"/>
         <Label Content="内网映射公告：" HorizontalAlignment="Left" Margin="15,303,0,0" VerticalAlignment="Top" FontSize="18" Foreground="Black" Background="{x:Null}"/>
         <Label x:Name="gonggao" Content="Label" HorizontalAlignment="Left" Margin="39,326,0,0" VerticalAlignment="Top" FontSize="14" Foreground="Black"/>
         <Label Content="←请先选择节点" HorizontalAlignment="Left" Margin="375,9,0,0" VerticalAlignment="Top" FontSize="16" Foreground="Black"/>
-        <TextBox x:Name="textBox3" HorizontalAlignment="Left" Height="23" Margin="401,196,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="404" Foreground="Black" Background="{x:Null}" IsEnabled="False"/>
-        <Label Content="如果您购买了付费节点，在此输入您的密码(选填)：" HorizontalAlignment="Left" Margin="375,166,0,0" VerticalAlignment="Top" Foreground="Black"/>
-        <RadioButton x:Name="useTcp" Content="TCP(Java服务器)" HorizontalAlignment="Left" Margin="450,230,0,0" VerticalAlignment="Top" FontFamily="Microsoft YaHei UI" IsChecked="True" Background="{x:Null}"/>
-        <RadioButton x:Name="useUdp" Content="UDP(BE服务器)" HorizontalAlignment="Left" Margin="589,230,0,0" VerticalAlignment="Top" FontFamily="Microsoft YaHei UI" Background="{x:Null}"/>
-        <Label Content="传输协议：" HorizontalAlignment="Left" Margin="375,230,0,0" VerticalAlignment="Top" Foreground="Black"/>
+        <TextBox x:Name="textBox3" HorizontalAlignment="Left" Height="23" Margin="401,162,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="404" Foreground="Black" Background="{x:Null}" IsEnabled="False"/>
+        <Label Content="如果您购买了付费节点，在此输入您的密码(选填)：" HorizontalAlignment="Left" Margin="375,144,0,0" VerticalAlignment="Top" Foreground="Black"/>
+        <RadioButton x:Name="useTcp" Content="TCP(Java服务器)" HorizontalAlignment="Left" Margin="450,199,0,0" VerticalAlignment="Top" FontFamily="Microsoft YaHei UI" IsChecked="True" Background="{x:Null}" Checked="useTcp_Checked"/>
+        <RadioButton x:Name="useUdp" Content="UDP(BE服务器)" HorizontalAlignment="Left" Margin="589,199,0,0" VerticalAlignment="Top" FontFamily="Microsoft YaHei UI" Background="{x:Null}" Checked="useUdp_Checked"/>
+        <Label Content="传输协议：" HorizontalAlignment="Left" Margin="375,199,0,0" VerticalAlignment="Top" Foreground="Black"/>
         <CheckBox x:Name="useKcp" Content="使用KCP加速传输（付费节点专享）" HorizontalAlignment="Left" Margin="450,262,0,0" VerticalAlignment="Top" FontFamily="Microsoft YaHei UI" IsEnabled="False"/>
+        <RadioButton x:Name="useDouble" Content="TCP和UDP双协议(互通服用)" HorizontalAlignment="Left" Margin="450,230,0,0" VerticalAlignment="Top" FontFamily="Microsoft YaHei UI" Background="{x:Null}" Checked="useDouble_Checked"/>
     </Grid>
 </Window>

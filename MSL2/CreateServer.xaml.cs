@@ -40,21 +40,25 @@ namespace MSL2
                 if (File.Exists(AppDomain.CurrentDomain.BaseDirectory + @"MSL2\Java8\bin\java.exe"))
                 {
                     MainWindow.serverjava = "\"" + AppDomain.CurrentDomain.BaseDirectory + @"MSL2\Java8\bin\java.exe" + "\"";
-                    sJVM.IsSelected = true;
-                    sJVM.IsEnabled = true;
-                    sserver.IsEnabled = false;
                     MainWindow.serverserver = "\"" + txb3.Text + "\"";
                     next3.IsEnabled = true;
                     return1.IsEnabled = true;
+                    javagrid.Visibility = Visibility.Hidden;
+                    servergrid.Visibility = Visibility.Visible;
+                    label3.Visibility = Visibility.Visible;
+                    downloadjava.Visibility = Visibility.Visible;
+                    selectjava.Visibility = Visibility.Visible;
+                    return2.Visibility = Visibility.Visible;
                 }
                 else
                 {
-                    MessageBox.Show("下载Java即代表您接受Java的服务条款https://www.oracle.com/downloads/licenses/javase-license1.html");
+                    MessageBox.Show("下载Java即代表您接受Java的服务条款https://www.oracle.com/downloads/licenses/javase-license1.html", "INFO", MessageBoxButton.OK, MessageBoxImage.Information);
                     if (Environment.Is64BitOperatingSystem)
                     {
                         DownjavaName = "Java8";
                         DownloadWindow.downloadurl = "https://oceansky12337-my.sharepoint.com/personal/makabaka_oceansky12337_onmicrosoft_com/_layouts/52/download.aspx?share=Ecs65caK7blGgZipDS1d76IBKDID3YUy9ak-HUzY_vDQUQ";
-                        DownloadWindow.filename = AppDomain.CurrentDomain.BaseDirectory + @"MSL2\Java.exe";
+                        DownloadWindow.downloadPath = AppDomain.CurrentDomain.BaseDirectory + @"MSL2";
+                        DownloadWindow.filename = "Java.exe";
                         DownloadWindow.downloadinfo = "下载Java8中……";
                         Window window = new DownloadWindow();
                         window.ShowDialog();
@@ -88,6 +92,7 @@ namespace MSL2
                         {
                             MessageBox.Show("安装失败，请查看是否有杀毒软件进行拦截！请确保添加信任或关闭杀毒软件后进行重新安装！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
                             next3.IsEnabled = true;
+                            return1.IsEnabled = true;
                             outlog.Content = "安装失败！";
                         }
                         /*
@@ -96,10 +101,11 @@ namespace MSL2
                     }
                     else
                     {
-                        MessageBox.Show("下载Java即代表您接受Java的服务条款https://www.oracle.com/downloads/licenses/javase-license1.html");
+                        MessageBox.Show("下载Java即代表您接受Java的服务条款https://www.oracle.com/downloads/licenses/javase-license1.html", "INFO", MessageBoxButton.OK, MessageBoxImage.Information);
                         DownjavaName = "Java8";
                         DownloadWindow.downloadurl = "https://oceansky12337-my.sharepoint.com/personal/makabaka_oceansky12337_onmicrosoft_com/_layouts/52/download.aspx?share=ES74HP6tN6dKuyTPUVOfEaYBJAecYATfZKXahAN_EZDC8Q";
-                        DownloadWindow.filename = AppDomain.CurrentDomain.BaseDirectory + @"MSL2\Java.exe";
+                        DownloadWindow.downloadPath = AppDomain.CurrentDomain.BaseDirectory + @"MSL2";
+                        DownloadWindow.filename = "Java.exe";
                         DownloadWindow.downloadinfo = "下载Java8中……";
                         Window window = new DownloadWindow();
                         window.ShowDialog();
@@ -133,6 +139,7 @@ namespace MSL2
                         {
                             MessageBox.Show("安装失败，请查看是否有杀毒软件进行拦截！请确保添加信任或关闭杀毒软件后进行重新安装！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
                             next3.IsEnabled = true;
+                            return1.IsEnabled = true;
                             outlog.Content = "安装失败！";
                         }
                         /*
@@ -154,19 +161,23 @@ namespace MSL2
                 if (File.Exists(AppDomain.CurrentDomain.BaseDirectory + @"MSL2\Java16\bin\java.exe"))
                 {
                     MainWindow.serverjava = "\"" + AppDomain.CurrentDomain.BaseDirectory + @"MSL2\Java16\bin\java.exe" + "\"";
-                    sJVM.IsSelected = true;
-                    sJVM.IsEnabled = true;
-                    sserver.IsEnabled = false;
                     MainWindow.serverserver = "\"" + txb3.Text + "\"";
                     next3.IsEnabled = true;
                     return1.IsEnabled = true;
+                    javagrid.Visibility = Visibility.Hidden;
+                    servergrid.Visibility = Visibility.Visible;
+                    label3.Visibility = Visibility.Visible;
+                    downloadjava.Visibility = Visibility.Visible;
+                    selectjava.Visibility = Visibility.Visible;
+                    return2.Visibility = Visibility.Visible;
                 }
                 else
                 {
-                    MessageBox.Show("下载Java即代表您接受Java的服务条款https://www.oracle.com/downloads/licenses/javase-license1.html");
+                    MessageBox.Show("下载Java即代表您接受Java的服务条款https://www.oracle.com/downloads/licenses/javase-license1.html", "INFO", MessageBoxButton.OK, MessageBoxImage.Information);
                     DownjavaName = "Java16";
                     DownloadWindow.downloadurl = "https://oceansky12337-my.sharepoint.com/personal/makabaka_oceansky12337_onmicrosoft_com/_layouts/52/download.aspx?share=EbapBNLCCwRLoFr2kxeCUdcBYNtGdsQO2h1MlzgFU3VZbQ";
-                    DownloadWindow.filename = AppDomain.CurrentDomain.BaseDirectory + @"MSL2\Java.exe";
+                    DownloadWindow.downloadPath = AppDomain.CurrentDomain.BaseDirectory + @"MSL2";
+                    DownloadWindow.filename = "Java.exe";
                     DownloadWindow.downloadinfo = "下载Java16中……";
                     Window window = new DownloadWindow();
                     window.ShowDialog();
@@ -200,6 +211,7 @@ namespace MSL2
                     {
                         MessageBox.Show("安装失败，请查看是否有杀毒软件进行拦截！请确保添加信任或关闭杀毒软件后进行重新安装！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
                         next3.IsEnabled = true;
+                        return1.IsEnabled = true;
                         outlog.Content = "安装失败！";
                     }
                     /*
@@ -217,19 +229,23 @@ namespace MSL2
                 if (File.Exists(AppDomain.CurrentDomain.BaseDirectory + @"MSL2\Java17\bin\java.exe"))
                 {
                     MainWindow.serverjava = "\"" + AppDomain.CurrentDomain.BaseDirectory + @"MSL2\Java17\bin\java.exe" + "\"";
-                    sJVM.IsSelected = true;
-                    sJVM.IsEnabled = true;
-                    sserver.IsEnabled = false;
                     MainWindow.serverserver = "\"" + txb3.Text + "\"";
                     next3.IsEnabled = true;
                     return1.IsEnabled = true;
+                    javagrid.Visibility = Visibility.Hidden;
+                    servergrid.Visibility = Visibility.Visible;
+                    label3.Visibility = Visibility.Visible;
+                    downloadjava.Visibility = Visibility.Visible;
+                    selectjava.Visibility = Visibility.Visible;
+                    return2.Visibility = Visibility.Visible;
                 }
                 else
                 {
-                    MessageBox.Show("下载Java即代表您接受Java的服务条款https://www.oracle.com/downloads/licenses/javase-license1.html");
+                    MessageBox.Show("下载Java即代表您接受Java的服务条款https://www.oracle.com/downloads/licenses/javase-license1.html", "INFO", MessageBoxButton.OK, MessageBoxImage.Information);
                     DownjavaName = "Java17";
                     DownloadWindow.downloadurl = "https://oceansky12337-my.sharepoint.com/personal/makabaka_oceansky12337_onmicrosoft_com/_layouts/52/download.aspx?share=EUxH8cdGAlxOkNiZGunIefEBwrdoMM5wPIb5h9xDpiWd_A";
-                    DownloadWindow.filename = AppDomain.CurrentDomain.BaseDirectory + @"MSL2\Java.exe";
+                    DownloadWindow.downloadPath = AppDomain.CurrentDomain.BaseDirectory + @"MSL2";
+                    DownloadWindow.filename = "Java.exe";
                     DownloadWindow.downloadinfo = "下载Java17中……";
                     Window window = new DownloadWindow();
                     window.ShowDialog();
@@ -259,10 +275,11 @@ namespace MSL2
                             return;
                         }*/
                     }
-                    catch
+                    catch (Exception aaa)
                     {
-                        MessageBox.Show("安装失败，请查看是否有杀毒软件进行拦截！请确保添加信任或关闭杀毒软件后进行重新安装！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                        MessageBox.Show("安装失败，请查看是否有杀毒软件进行拦截！请确保添加信任或关闭杀毒软件后进行重新安装！\n" + aaa, "错误", MessageBoxButton.OK, MessageBoxImage.Error);
                         next3.IsEnabled = true;
+                        return1.IsEnabled = true;
                         outlog.Content = "安装失败！";
                     }
                     /*
@@ -279,22 +296,28 @@ namespace MSL2
             if (useJVself.IsChecked == true)
             {
                 MainWindow.serverjava = "\"" + txjava.Text + "\"";
-                sJVM.IsSelected = true;
-                sJVM.IsEnabled = true;
-                sserver.IsEnabled = false;
                 MainWindow.serverserver = "\"" + txb3.Text + "\"";
                 next3.IsEnabled = true;
                 return1.IsEnabled = true;
+                javagrid.Visibility = Visibility.Hidden;
+                servergrid.Visibility = Visibility.Visible;
+                label3.Visibility = Visibility.Visible;
+                downloadjava.Visibility = Visibility.Visible;
+                selectjava.Visibility = Visibility.Visible;
+                return2.Visibility = Visibility.Visible;
             }
             if (usejvPath.IsChecked == true)
             {
                 MainWindow.serverjava = "Java";
-                sJVM.IsSelected = true;
-                sJVM.IsEnabled = true;
-                sserver.IsEnabled = false;
                 MainWindow.serverserver = "\"" + txb3.Text + "\"";
                 next3.IsEnabled = true;
                 return1.IsEnabled = true;
+                javagrid.Visibility = Visibility.Hidden;
+                servergrid.Visibility = Visibility.Visible;
+                label3.Visibility = Visibility.Visible;
+                downloadjava.Visibility = Visibility.Visible;
+                selectjava.Visibility = Visibility.Visible;
+                return2.Visibility = Visibility.Visible;
             }
         }
 
@@ -310,6 +333,14 @@ namespace MSL2
             else
             {
                 MainWindow.serverJVM = "-Xms" + txb4.Text + "M -Xmx" + txb5.Text + "M";
+            }
+            if (usebasicfastJvm.IsChecked == true)
+            {
+                MainWindow.serverJVMcmd = "-XX:+AggressiveOpts";
+            }
+            if (usefastJvm.IsChecked == true)
+            {
+                MainWindow.serverJVMcmd = "-XX:+UseG1GC -XX:+UnlockExperimentalVMOptions -XX:+ParallelRefProcEnabled -XX:MaxGCPauseMillis=200 -XX:+UnlockExperimentalVMOptions -XX:+DisableExplicitGC -XX:+AlwaysPreTouch -XX:G1NewSizePercent=30 -XX:G1MaxNewSizePercent=40 -XX:G1HeapRegionSize=8M -XX:G1ReservePercent=20 -XX:G1HeapWastePercent=5 -XX:G1MixedGCCountTarget=4 -XX:InitiatingHeapOccupancyPercent=15 -XX:G1MixedGCLiveThresholdPercent=90 -XX:G1RSetUpdatingPauseTimePercent=5 -XX:SurvivorRatio=32 -XX:+PerfDisableSharedMem -XX:MaxTenuringThreshold=1 -Dusing.aikars.flags=https://mcflags.emc.gs -Daikars.new.flags=true";
             }
         }
 
@@ -336,7 +367,7 @@ namespace MSL2
             {
                 Directory.CreateDirectory(MainWindow.serverbase);
                 StreamWriter sw = File.AppendText(AppDomain.CurrentDomain.BaseDirectory + @"MSL2\server.ini");
-                sw.Write("*|-j " + "\"" + MainWindow.serverjava + "\"" + "|-s " + "\"" + MainWindow.serverserver + "\"" + "|-a " + MainWindow.serverJVM + "|-b " + MainWindow.serverbase + "|*");
+                sw.Write("*|-j " + "\"" + MainWindow.serverjava + "\"" + "|-s " + "\"" + MainWindow.serverserver + "\"" + "|-a " + MainWindow.serverJVM + "|-b " + MainWindow.serverbase + "|-c " + MainWindow.serverJVMcmd + "|*");
                 sw.Flush();
                 sw.Close();
                 sw.Dispose();
@@ -440,13 +471,16 @@ namespace MSL2
                 {
                     File.Delete(AppDomain.CurrentDomain.BaseDirectory + @"MSL2\Java.exe");
                     outlog.Content = "完成";
-                    sJVM.IsSelected = true;
-                    sJVM.IsEnabled = true;
-                    sserver.IsEnabled = false;
                     MainWindow.serverjava = AppDomain.CurrentDomain.BaseDirectory + @"MSL2\" + DownjavaName + @"\bin\java.exe";
                     MainWindow.serverserver = "\"" + txb3.Text + "\"";
                     next3.IsEnabled = true;
                     return1.IsEnabled = true;
+                    javagrid.Visibility = Visibility.Hidden;
+                    servergrid.Visibility = Visibility.Visible;
+                    label3.Visibility = Visibility.Visible;
+                    downloadjava.Visibility = Visibility.Visible;
+                    selectjava.Visibility = Visibility.Visible;
+                    return2.Visibility = Visibility.Visible;
                     timer1.Stop();
                 }
                 catch
@@ -510,22 +544,12 @@ namespace MSL2
         {
             Window wn = new DownloadServer();
             wn.ShowDialog();
-            try
-            {
-                if (File.Exists(MainWindow.serverserver.Replace("\"","")))
-                {
-                    txb3.Text = MainWindow.serverserver.Replace("\"", "");
-                    servergrid.Visibility = Visibility.Hidden;
-                    label3.Visibility = Visibility.Visible;
-                    downloadjava.Visibility = Visibility.Visible;
-                    selectjava.Visibility = Visibility.Visible;
-                    return1.Visibility = Visibility.Visible;
-                }
-            }
-            catch
-            {
-
-            }
+            txb3.Text = MainWindow.serverserver.Replace("\"", "");
+            sJVM.IsSelected = true;
+            sJVM.IsEnabled = true;
+            sserver.IsEnabled = false;
+            next3.IsEnabled = true;
+            return1.IsEnabled = true;
         }
 
         private void selectserver_Click(object sender, RoutedEventArgs e)
@@ -542,11 +566,11 @@ namespace MSL2
 
         private void next2_Click(object sender, RoutedEventArgs e)
         {
-            servergrid.Visibility = Visibility.Hidden;
-            label3.Visibility = Visibility.Visible;
-            downloadjava.Visibility = Visibility.Visible;
-            selectjava.Visibility = Visibility.Visible;
-            return1.Visibility = Visibility.Visible;
+            sJVM.IsSelected = true;
+            sJVM.IsEnabled = true;
+            sserver.IsEnabled = false;
+            next3.IsEnabled = true;
+            return1.IsEnabled = true;
         }
 
         private void selectjava_Click(object sender, RoutedEventArgs e)
@@ -557,7 +581,7 @@ namespace MSL2
             txjava.Visibility = Visibility.Visible;
             a0002_Copy.Visibility = Visibility.Visible;
             next3.Visibility = Visibility.Visible;
-            //return1.Visibility = Visibility.Visible;
+            return1.Visibility = Visibility.Visible;
             label3.Visibility = Visibility.Hidden;
             downloadjava.Visibility = Visibility.Hidden;
             selectjava.Visibility = Visibility.Hidden;
@@ -572,7 +596,7 @@ namespace MSL2
             outlog.Visibility = Visibility.Visible;
             jvhelp.Visibility = Visibility.Visible;
             next3.Visibility = Visibility.Visible;
-            //return1.Visibility = Visibility.Visible;
+            return1.Visibility = Visibility.Visible;
             label3.Visibility = Visibility.Hidden;
             downloadjava.Visibility = Visibility.Hidden;
             selectjava.Visibility = Visibility.Hidden;
@@ -583,11 +607,12 @@ namespace MSL2
             downloadserver.Visibility = Visibility.Visible;
             selectserver.Visibility = Visibility.Visible;
             label1.Visibility = Visibility.Visible;
-            servergrid.Visibility = Visibility.Visible;
+            javagrid.Visibility = Visibility.Visible;
             label3.Visibility = Visibility.Visible;
             downloadjava.Visibility = Visibility.Visible;
             selectjava.Visibility = Visibility.Visible;
             return1.Visibility = Visibility.Visible;
+            servergrid.Visibility = Visibility.Hidden;
             label5.Visibility = Visibility.Hidden;
             usejv8.Visibility = Visibility.Hidden;
             usejv16.Visibility = Visibility.Hidden;
@@ -621,6 +646,27 @@ namespace MSL2
             {
                 MessageBox.Show("出现错误，请重试" + "c0x1", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+        }
+        private void usebasicfastJvm_Checked(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("使用优化参数需要手动设置大小相同的内存，请对上面的内存进行更改！", "警告", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+            useJVM.IsChecked = true;
+            txb4.Text = "1024";
+            txb5.Text = "1024";
+        }
+        private void usefastJvm_Checked(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("使用优化参数需要手动设置大小相同的内存，请对上面的内存进行更改！", "警告", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+            useJVM.IsChecked = true;
+            txb4.Text = "2048";
+            txb5.Text = "2048";
+        }
+
+        private void usefastJvmPro_Checked(object sender, RoutedEventArgs e)
+        {
+            useJVM.IsChecked = true;
+            txb4.Text = "10240";
+            txb5.Text = "10240";
         }
     }
 }

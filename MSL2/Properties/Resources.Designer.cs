@@ -59,5 +59,75 @@ namespace MSL2.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap _150px_Anvil {
+            get {
+                object obj = ResourceManager.GetObject("_150px_Anvil", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap _150px_Beacon {
+            get {
+                object obj = ResourceManager.GetObject("_150px_Beacon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap _150px_Diamond_Revision_2 {
+            get {
+                object obj = ResourceManager.GetObject("_150px_Diamond_Revision_2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap _150px_Enchanted_Book {
+            get {
+                object obj = ResourceManager.GetObject("_150px_Enchanted_Book", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap _150px_Enchanted_Book1 {
+            get {
+                object obj = ResourceManager.GetObject("_150px_Enchanted_Book1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap _150px_Grass_Block_JE7_BE6 {
+            get {
+                object obj = ResourceManager.GetObject("_150px_Grass_Block_JE7_BE6", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap _150px_Wooden_Pickaxe_JE3_BE3 {
+            get {
+                object obj = ResourceManager.GetObject("_150px_Wooden_Pickaxe_JE3_BE3", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }

@@ -1,4 +1,4 @@
-﻿using Downloader;
+﻿using Gac;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
@@ -19,6 +19,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
+using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -32,20 +33,68 @@ namespace MSL2
     /// </summary>
     public partial class DownloadWindow : Window
     {
+        DownLoadFile dlf = new DownLoadFile();
+        public static int downloadthread = 16;
         public static string downloadinfo;
+        public static string downloadPath;
         public static string filename;
         public static string downloadurl;
-        static Thread thread;
+        DispatcherTimer timer1 = new DispatcherTimer();
+        //static Thread thread;
         public DownloadWindow()
         {
             InitializeComponent();
         }
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            dlf.DownLoadThreadNum = downloadthread;//下载线程数，不设置默认为3
+            dlf.doSendMsg += SendMsgHander;//下载过程处理事件
+            dlf.AddDown(downloadurl, downloadPath, 0, filename);
+            dlf.StartDown(1);
             taskinfo.Content = downloadinfo;
-            infolabel.Text= downloadinfo;
+            infolabel.Text = downloadinfo;
+            timer1.Tick += new EventHandler(timer1_Tick);
+            timer1.Interval = TimeSpan.FromSeconds(1);
+            timer1.Start();
+            /*
             thread = new Thread(Downloader);
-            thread.Start();
+            thread.Start();*/
+        }
+        private void SendMsgHander(DownMsg msg)
+        {
+            switch (msg.Tag)
+            {
+                case DownStatus.Start:
+                    this.Dispatcher.Invoke(DispatcherPriority.Normal, (ThreadStart)delegate ()
+                    {
+                        infolabel.Text = "获取下载地址……大小：" + msg.LengthInfo;
+                    });
+                    break;
+                case DownStatus.End:
+                    this.Dispatcher.Invoke(DispatcherPriority.Normal, (ThreadStart)delegate ()
+                    {
+                        pbar.Value = 100;
+                        infolabel.Text = "下载完成！";
+                    });
+                    break;
+                case DownStatus.DownLoad:
+                    this.Dispatcher.Invoke(DispatcherPriority.Normal, (ThreadStart)delegate ()
+                    {
+                        infolabel.Text = "已下载：" + msg.SizeInfo + " 进度：" + msg.Progress.ToString() + "%" + " 速度：" + msg.SpeedInfo + " 剩余时间：" + msg.SurplusInfo;
+                        pbar.Value = msg.Progress;
+                    });
+                    System.Windows.Forms.Application.DoEvents();
+                    break;
+                case DownStatus.Error:
+                    this.Dispatcher.Invoke(DispatcherPriority.Normal, (ThreadStart)delegate ()
+                    {
+                        infolabel.Text = "失败：" + msg.ErrMessage;
+                        System.Windows.Forms.Application.DoEvents();
+                        //thread = new Thread(Downloadfile);
+                        //thread.Start();
+                    });
+                    break;
+            }
         }
         public static class DispatcherHelper
         {
@@ -63,68 +112,69 @@ namespace MSL2
                 return null;
             }
         }
-        public void Downloader()
+        void timer1_Tick(object sender, EventArgs e)
         {
-            var downloadOpt = new DownloadConfiguration()
+            if(infolabel.Text== "下载完成！")
             {
-                BufferBlockSize = 10240, // usually, hosts support max to 8000 bytes, default values is 8000
-                ChunkCount = 1, // file parts to download, default value is 1
-                MaximumBytesPerSecond = 1024 * 1024, // download speed limited to 1MB/s, default values is zero or unlimited
-                MaxTryAgainOnFailover = int.MaxValue, // the maximum number of times to fail
-                OnTheFlyDownload = false, // caching in-memory or not? default values is true
-                ParallelDownload = true, // download parts of file as parallel or not. Default value is false
-                TempDirectory = AppDomain.CurrentDomain.BaseDirectory+"MSL2\\temp", // Set the temp path for buffering chunk files, the default path is Path.GetTempPath()
-                Timeout = 1000, // timeout (millisecond) per stream block reader, default values is 1000
-                RequestConfiguration = // config and customize request headers
-    {
-        Accept = "*/*",
-        AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate,
-        CookieContainer =  new CookieContainer(), // Add your cookies
-        Headers = new WebHeaderCollection(), // Add your custom headers
-        KeepAlive = false,
-        ProtocolVersion = HttpVersion.Version11, // Default value is HTTP 1.1
-        UseDefaultCredentials = false,
-        UserAgent = $"DownloaderSample/{Assembly.GetExecutingAssembly().GetName().Version.ToString(3)}"
-    }
-            };
-            var downloader = new DownloadService(downloadOpt);
-            // Provide `FileName` and `TotalBytesToReceive` at the start of each downloads
-            downloader.DownloadStarted += OnDownloadStarted;
-            // Provide any information about download progress, like progress percentage of sum of chunks, total speed, average speed, total received bytes and received bytes array to live streaming.
-            downloader.DownloadProgressChanged += OnDownloadProgressChanged;
-            // Download completed event that can include occurred errors or cancelled or download completed successfully.
-            downloader.DownloadFileCompleted += OnDownloadFileCompleted;
-            string file = filename;
-            string url = downloadurl;
-            downloader.DownloadFileTaskAsync(url, file);
-        }
-
-        private void OnDownloadStarted(object sender, DownloadStartedEventArgs e)
-        {
-            this.Dispatcher.Invoke(DispatcherPriority.Normal, (ThreadStart)delegate ()
-            {
-                infolabel.Text = "开始下载";
-            });
-        }
-        private void OnDownloadProgressChanged(object sender, Downloader.DownloadProgressChangedEventArgs e)
-        {
-            this.Dispatcher.Invoke(DispatcherPriority.Normal, (ThreadStart)delegate ()
-            {
-                infolabel.Text = "开始下载" + (int)e.ProgressPercentage+"%";
-                pbar.Value = (int)e.ProgressPercentage;
-            });
-        }
-        private void OnDownloadFileCompleted(object sender, AsyncCompletedEventArgs e)
-        {
-            this.Dispatcher.Invoke(DispatcherPriority.Normal, (ThreadStart)delegate ()
-            {
-                infolabel.Text = "下载完成";
                 Close();
-            });
+            }
         }
-        private void Button_Click(object sender, RoutedEventArgs e)
+            /*
+            private void Downloadfile()
+            {
+                this.Dispatcher.Invoke(DispatcherPriority.Normal, (ThreadStart)delegate ()
+                {
+                    infolabel.Text = "连接下载地址中...";
+                });
+                //try
+                //{
+                    HttpWebRequest Myrq = (HttpWebRequest)HttpWebRequest.Create(downloadurl);
+                    HttpWebResponse myrp;
+                    myrp = (HttpWebResponse)Myrq.GetResponse();
+                    long totalBytes = myrp.ContentLength;
+                    Stream st = myrp.GetResponseStream();
+                    FileStream so;
+                System.Windows.MessageBox.Show(downloadPath);
+                    if (downloadPath.Substring(downloadPath.Length - 2, 1) == "\\")
+                    {
+                         so= new FileStream(downloadPath + filename, FileMode.Create);
+                    }
+                    else
+                    {
+                        so = new FileStream(downloadPath + "\\" + filename, FileMode.Create);
+                    }
+                    long totalDownloadedByte = 0;
+                    byte[] by = new byte[1024];
+                    int osize = st.Read(by, 0, (int)by.Length);
+                    while (osize > 0)
+                    {
+                        totalDownloadedByte = osize + totalDownloadedByte;
+                        DispatcherHelper.DoEvents();
+                        so.Write(by, 0, osize);
+                        osize = st.Read(by, 0, (int)by.Length);
+                        float percent = 0;
+                        percent = (float)totalDownloadedByte / (float)totalBytes * 100;
+                        this.Dispatcher.Invoke(DispatcherPriority.Normal, (ThreadStart)delegate ()
+                        {
+                            infolabel.Text = "下载中：" + percent.ToString("f2") + "%";
+                        });
+                        DispatcherHelper.DoEvents();
+                    }
+                    so.Close();
+                    st.Close();
+                    Close();
+                //}
+                //catch (Exception aaa)
+                //{
+                 //   this.Dispatcher.Invoke(DispatcherPriority.Normal, (ThreadStart)delegate ()
+                 //   {
+                  //      infolabel.Text = "发生错误" + aaa;
+                 //   });
+                //}
+            }*/
+
+            private void button1_Click(object sender, RoutedEventArgs e)
         {
-            thread.Abort();
             Close();
         }
     }

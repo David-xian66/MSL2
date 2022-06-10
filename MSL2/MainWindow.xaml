@@ -3,268 +3,80 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:ui="http://schemas.modernwpf.com/2019"
+        ui:WindowHelper.UseModernWindowStyle="True"
         xmlns:local="clr-namespace:MSL2"
         x:Class="MSL2.MainWindow"
-        mc:Ignorable="d" Height="500" Width="847" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Loaded="Window_Loaded" Closing="Window_Closing" StateChanged="Window_StateChanged" Background="{x:Null}" WindowStyle="None" AllowsTransparency="True">
-    <Window.Triggers>
-        <EventTrigger RoutedEvent="Loaded">
-            <BeginStoryboard>
-                <Storyboard>
-                    <DoubleAnimation Duration="0:0:0.5" From="0" To="1" Storyboard.TargetProperty="Opacity" FillBehavior="Stop"/>
-                    <DoubleAnimation Duration="0:0:0.5" From="0" To="1" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleX)" FillBehavior="Stop" Storyboard.TargetName="mainGrid"/>
-                    <DoubleAnimation Duration="0:0:0.5" From="0" To="1" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleY)" FillBehavior="Stop" Storyboard.TargetName="mainGrid"/>
-                </Storyboard>
-            </BeginStoryboard>
-        </EventTrigger>
-    </Window.Triggers>
-    <Window.Resources>
-        <ResourceDictionary>
-            <Storyboard x:Key="HideWindow">
-                <DoubleAnimation Duration="0:0:0.5" From="1" To="0" Storyboard.TargetProperty="Opacity" FillBehavior="Stop" />
-                <DoubleAnimation Duration="0:0:0.5" From="1" To="0" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleX)" FillBehavior="Stop" Storyboard.TargetName="mainGrid"/>
-                <DoubleAnimation Duration="0:0:0.5" From="1" To="0" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleY)" FillBehavior="Stop" Storyboard.TargetName="mainGrid"/>
-            </Storyboard>
-            <Storyboard x:Key="ShowWindow" >
-                <DoubleAnimation Duration="0:0:0.5" From="0" To="1" Storyboard.TargetProperty="Opacity" FillBehavior="Stop"/>
-                <DoubleAnimation Duration="0:0:0.5" From="0" To="1" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleX)" FillBehavior="Stop" Storyboard.TargetName="mainGrid"/>
-                <DoubleAnimation Duration="0:0:0.5" From="0" To="1" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleY)" FillBehavior="Stop" Storyboard.TargetName="mainGrid"/>
-            </Storyboard>
-            <Style x:Key="FocusVisual">
-                <Setter Property="Control.Template">
-                    <Setter.Value>
-                        <ControlTemplate>
-                            <Rectangle Margin="2" SnapsToDevicePixels="true" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" StrokeThickness="1" StrokeDashArray="1 2"/>
-                        </ControlTemplate>
-                    </Setter.Value>
-                </Setter>
-            </Style>
-            <Style x:Key="closebtnStyle" TargetType="{x:Type Button}">
-                <Setter Property="Template">
-                    <Setter.Value>
-                        <ControlTemplate TargetType="{x:Type Button}">
-                            <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="true">
-                                <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
-                            </Border>
-                            <ControlTemplate.Triggers>
-                                <Trigger Property="IsDefaulted" Value="true">
-                                    <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
-                                </Trigger>
-                                <Trigger Property="IsMouseOver" Value="true">
-                                    <Setter Property="Background" TargetName="border" Value="#FFFF8686"/>
-                                    <Setter Property="BorderBrush" TargetName="border" Value="#FFFF8686"/>
-                                </Trigger>
-                                <Trigger Property="IsPressed" Value="true">
-                                    <Setter Property="Background" TargetName="border" Value="#FFFF1F1F"/>
-                                    <Setter Property="BorderBrush" TargetName="border" Value="#FFFF1F1F"/>
-                                </Trigger>
-                            </ControlTemplate.Triggers>
-                        </ControlTemplate>
-                    </Setter.Value>
-                </Setter>
-            </Style>
-            <Style x:Key="minbtnStyle" TargetType="{x:Type Button}">
-                <Setter Property="Template">
-                    <Setter.Value>
-                        <ControlTemplate TargetType="{x:Type Button}">
-                            <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="true">
-                                <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
-                            </Border>
-                            <ControlTemplate.Triggers>
-                                <Trigger Property="IsDefaulted" Value="true">
-                                    <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
-                                </Trigger>
-                                <Trigger Property="IsMouseOver" Value="true">
-                                    <Setter Property="Background" TargetName="border" Value="#FFBFBFBF"/>
-                                    <Setter Property="BorderBrush" TargetName="border" Value="#FFBFBFBF"/>
-                                </Trigger>
-                                <Trigger Property="IsPressed" Value="true">
-                                    <Setter Property="Background" TargetName="border" Value="#FF6E6E6E"/>
-                                    <Setter Property="BorderBrush" TargetName="border" Value="#FF6E6E6E"/>
-                                </Trigger>
-                            </ControlTemplate.Triggers>
-                        </ControlTemplate>
-                    </Setter.Value>
-                </Setter>
-            </Style>
-            <SolidColorBrush x:Key="TabItem.Selected.Background" Color="#FFFFFF"/>
-            <SolidColorBrush x:Key="TabItem.Selected.Border" Color="#ACACAC"/>
-            <Style x:Key="tabcontrol1Style" TargetType="{x:Type TabControl}">
-                <Setter Property="Padding" Value="2"/>
-                <Setter Property="HorizontalContentAlignment" Value="Center"/>
-                <Setter Property="VerticalContentAlignment" Value="Center"/>
-                <Setter Property="Background" Value="{StaticResource TabItem.Selected.Background}"/>
-                <Setter Property="BorderBrush" Value="{StaticResource TabItem.Selected.Border}"/>
-                <Setter Property="BorderThickness" Value="1"/>
-                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
-            </Style>
-        </ResourceDictionary>
-    </Window.Resources>
-    <Grid x:Name="mainGrid">
-        <Grid.RenderTransform>
-            <TransformGroup>
-                <ScaleTransform  ScaleX="1" ScaleY="1"/>
-                <SkewTransform/>
-                <RotateTransform/>
-                <TranslateTransform/>
-            </TransformGroup>
-        </Grid.RenderTransform>
-        <Border x:Name="mainBorder" CornerRadius="5" Margin="5,4,5,5">
-            <Border.Background>
-                <SolidColorBrush Color="White" Opacity="0.85"/>
-            </Border.Background>
-            <Border.Effect>
-                <DropShadowEffect ShadowDepth="0"/>
-            </Border.Effect>
-            <Grid x:Name="Grid1">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="30"/>
-                    <RowDefinition/>
-                </Grid.RowDefinitions>
-                <Border CornerRadius="5" MouseLeftButtonDown="Border_MouseLeftButtonDown">
-                    <Border.Background>
-                        <SolidColorBrush Color="#FFF1F3F8"/>
-                    </Border.Background>
-                    <Grid x:Name="title">
-                        <Image Source="我的世界开服器_00001.ico" Margin="0,0,807,0" RenderTransformOrigin="0.5,0.5"/>
-                        <Label x:Name="titlelabel" Content="MSL2" FontSize="22" Margin="30,3,732,0" Foreground="Black"/>
-                        <Button x:Name="minbtn" Content="一" Width="50" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Click="minbtn_Click" FontSize="10" FontWeight="Bold" Style="{DynamicResource minbtnStyle}" Margin="743,0,44,0" BorderBrush="{x:Null}">
-                            <Button.Background>
-                                <SolidColorBrush Color="#FFF1F3F8" Opacity="0.3"/>
-                            </Button.Background>
-                        </Button>
-                        <Button x:Name="closebtn" Content="×" Width="40" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Click="closebtn_Click" FontSize="18" Style="{DynamicResource closebtnStyle}" Margin="793,0,4,0" BorderBrush="{x:Null}">
-                            <Button.Background>
-                                <SolidColorBrush Color="#FFF1F3F8" Opacity="0.3"/>
-                            </Button.Background>
-                        </Button>
-                    </Grid>
-                </Border>
-                <Grid x:Name="body" Grid.Row="1">
-                    <TabControl x:Name="tabcontrol1" HorizontalAlignment="Left" Height="459" VerticalAlignment="Top" Width="835" TabStripPlacement="Left" SelectionChanged="tabcontrol1_SelectionChanged" Margin="2,0,0,0">
-                        <TabControl.Background>
-                            <SolidColorBrush Color="#FFF1F3F8"/>
-                        </TabControl.Background>
-                        <TabItem x:Name="home" Header="&#xA;&#xA;主页" Background="{x:Null}">
-                            <Grid Background="#FFF1F3F8" Margin="0,0,2,0">
-                                <Button x:Name="startServer" Content="开启服务器" HorizontalAlignment="Left" Margin="567,384,0,0" VerticalAlignment="Top" Width="206" Height="66" FontFamily="Microsoft YaHei UI" FontSize="24" FontWeight="Normal" Click="startServer_Click" MouseDoubleClick="startServer_MouseDoubleClick"/>
-                                <Label x:Name="welcomelabel" Content="欢迎使用我的世界开服器！" HorizontalAlignment="Left" Margin="10,422,0,0" VerticalAlignment="Top" Foreground="Black" FontSize="22" Background="{x:Null}"/>
-                                <TextBox x:Name="noticeLab" Text=" 公告：获取公告失败！请检查网络连接！" Margin="10,10,11,252" IsReadOnly="True" VerticalScrollBarVisibility="Auto" Background="#FFFFFFFF"/>
-
-                            </Grid>
-                        </TabItem>
-                        <TabItem x:Name="serveroutlog" Header="&#xA;&#xA;输出" Background="{x:Null}">
-                            <Grid Background="#FFF1F3F8">
-                                <RichTextBox x:Name="outlog" HorizontalAlignment="Left" Height="404" VerticalAlignment="Top" Width="763" FontFamily="Microsoft YaHei UI" IsReadOnly="True" Visibility="Visible" Block.LineHeight="1" Margin="10,10,0,0" FontSize="12" Background="#FFFFFFFF">
-                                    <FlowDocument>
-                                        <Paragraph>
-                                            <Run Text="在此显示输出......"/>
-                                        </Paragraph>
-                                    </FlowDocument>
-                                </RichTextBox>
-                                <Button x:Name="onlineMode" Content="关闭正版验证" HorizontalAlignment="Left" Margin="164,419,0,0" VerticalAlignment="Top" Width="220" Click="onlineMode_Click" FontFamily="Microsoft YaHei UI" FontWeight="Normal" Visibility="Visible" FontSize="12" Height="30"/>
-                                <Button x:Name="autoStartserver" Content="关服自动开服:禁用" HorizontalAlignment="Left" Margin="400,419,0,0" VerticalAlignment="Top" Width="219" Click="autoStartserver_Click" FontFamily="Microsoft YaHei UI" FontWeight="Normal" Visibility="Visible" FontSize="12" Height="30"/>
-                                <Button x:Name="sendcmd" Content="发送" HorizontalAlignment="Left" Margin="652,418,0,0" VerticalAlignment="Top" Width="50" Click="sendcmd_Click" FontFamily="Microsoft YaHei UI" FontWeight="Normal" Visibility="Visible" FontSize="12" Height="32" IsEnabled="False"/>
-                                <Button x:Name="moreTools" Content="更多功能" HorizontalAlignment="Left" Margin="707,418,0,0" VerticalAlignment="Top" Width="66" FontFamily="Microsoft YaHei UI" FontWeight="Normal" Visibility="Visible" FontSize="12" Click="moreTools_Click" Height="32"/>
-                                <ComboBox x:Name="fastCMD" HorizontalAlignment="Left" Margin="10,418,0,0" VerticalAlignment="Top" Width="114" Height="32" SelectedIndex="0" IsEnabled="False" Background="#FFFBFBFD" Foreground="Black" BorderBrush="#FF064D2A">
-                                    <ComboBoxItem Content="/" FontFamily="Microsoft YaHei UI"/>
-                                    <ComboBoxItem Content="/op" FontFamily="Microsoft YaHei UI"/>
-                                    <ComboBoxItem Content="/deop" FontFamily="Microsoft YaHei UI"/>
-                                    <ComboBoxItem Content="/ban" FontFamily="Microsoft YaHei UI"/>
-                                    <ComboBoxItem Content="/say" FontFamily="Microsoft YaHei UI"/>
-                                    <ComboBoxItem Content="/pardon" FontFamily="Microsoft YaHei UI"/>
-                                </ComboBox>
-                                <TextBox x:Name="cmdtext" HorizontalAlignment="Left" Height="27" Margin="124,418,0,0" TextWrapping="Wrap" Text="服务器已关闭" VerticalAlignment="Top" Width="523" KeyDown="cmdtext_KeyDown" FontFamily="Microsoft YaHei UI" Visibility="Visible" Background="White" IsEnabled="False" Foreground="Black"/>
-                            </Grid>
-                        </TabItem>
-                        <TabItem x:Name="serversettings" Header="&#xA;&#xA;设置" Background="{x:Null}">
-                            <ScrollViewer Background="#FFF1F3F8">
-                                <StackPanel>
-                                    <Border BorderBrush="#FF8F8F8F" BorderThickness="1" CornerRadius="8" Margin="10" Background="#FFFFFFFF" Height="406">
-                                        <Grid>
-                                            <Label Content="服务器设置" Margin="335,0,335,379" Foreground="Gray" FontSize="18"/>
-                                            <Button x:Name="setServerconfig" Content="更改服务器配置文件" HorizontalAlignment="Left" VerticalAlignment="Top" Width="153" Height="35" FontFamily="Microsoft YaHei UI" FontSize="14" Background="{x:Null}" Click="setServerconfig_Click" BorderBrush="#FF0068FF" FontWeight="Normal" Foreground="Black" Margin="385,362,0,0"/>
-                                            <TextBox x:Name="server" HorizontalAlignment="Left" Height="8" Margin="119,30,0,0" VerticalAlignment="Top" Width="569" FontFamily="Microsoft YaHei UI" Background="{x:Null}" Foreground="Black" MaxLines="1" AutoWordSelection="True"/>
-                                            <TextBox x:Name="bAse" HorizontalAlignment="Left" Height="23" Margin="119,174,0,0" VerticalAlignment="Top" Width="569" FontFamily="Microsoft YaHei UI" Background="{x:Null}" Foreground="Black" MaxLines="1" AutoWordSelection="True"/>
-                                            <Label Content="服务端地址" HorizontalAlignment="Left" Margin="10,36,0,0" VerticalAlignment="Top" Foreground="Black"/>
-                                            <Label Content="服务器内存分配" HorizontalAlignment="Left" Margin="10,88,0,0" VerticalAlignment="Top" Foreground="Black"/>
-                                            <Label Content="服务器地址" HorizontalAlignment="Left" Margin="10,180,0,0" VerticalAlignment="Top" Foreground="Black" Background="{x:Null}"/>
-                                            <Label Content="Java" HorizontalAlignment="Left" Margin="10,217,0,0" VerticalAlignment="Top" Foreground="Black"/>
-                                            <Slider x:Name="memorySlider" Margin="124,119,74,258" Value="100"/>
-                                            <Label x:Name="memoryInfo" Content="现在为自动分配" HorizontalAlignment="Left" Margin="119,151,0,0" VerticalAlignment="Top" Background="{x:Null}" Foreground="#FF008B44"/>
-                                            <Button x:Name="a01" Content="浏览" HorizontalAlignment="Left" Margin="693,30,0,0" VerticalAlignment="Top" Width="59" Click="a01_Click" FontFamily="Microsoft YaHei UI" FontWeight="Normal" FontSize="12" Height="32"/>
-                                            <Button x:Name="a02" Content="浏览" HorizontalAlignment="Left" Margin="693,174,0,0" VerticalAlignment="Top" Width="59" Click="a02_Click" FontFamily="Microsoft YaHei UI" FontWeight="Normal" FontSize="12" Height="32"/>
-                                            <Button x:Name="a03" Content="浏览" HorizontalAlignment="Left" Margin="693,211,0,0" VerticalAlignment="Top" Width="59" Click="a03_Click" FontFamily="Microsoft YaHei UI" FontWeight="Normal" FontSize="12" Height="32"/>
-                                            <Button x:Name="downServer" Content="没有服务端？点我下载服务端" HorizontalAlignment="Left" Margin="463,67,0,0" VerticalAlignment="Top" Width="289" Click="downServer_Click" FontFamily="Microsoft YaHei UI" FontWeight="Normal" FontSize="18" Height="39"/>
-                                            <RadioButton x:Name="useSelf" Content="自选Java" HorizontalAlignment="Left" Margin="119,211,0,0" VerticalAlignment="Top" FontFamily="Microsoft YaHei UI" IsChecked="True" Background="{x:Null}" Foreground="Black" Width="79"/>
-                                            <RadioButton x:Name="useJv8" Content="让开服器为您下载Java8" HorizontalAlignment="Left" Margin="119,243,0,0" VerticalAlignment="Top" FontFamily="Microsoft YaHei UI" Background="{x:Null}" Foreground="Black"/>
-                                            <RadioButton x:Name="useJv16" Content="让开服器为您下载Java16" HorizontalAlignment="Left" Margin="301,243,0,0" VerticalAlignment="Top" FontFamily="Microsoft YaHei UI" Background="{x:Null}" Foreground="Black"/>
-                                            <RadioButton x:Name="useJv17" Content="让开服器为您下载Java17" HorizontalAlignment="Left" Margin="491,243,0,0" VerticalAlignment="Top" FontFamily="Microsoft YaHei UI" Background="{x:Null}" Foreground="Black"/>
-                                            <Label x:Name="downout" Content="" HorizontalAlignment="Left" Margin="10,377,0,0" VerticalAlignment="Top" FontSize="14" Foreground="Black" Width="169"/>
-                                            <RadioButton x:Name="useJvpath" Content="使用环境变量（使用该选项前请确保已安装Java且已配置好环境变量）" HorizontalAlignment="Left" Margin="119,275,0,0" VerticalAlignment="Top" FontFamily="Microsoft YaHei UI" Background="{x:Null}" Foreground="Black"/>
-                                            <Button x:Name="doneBtn1" Content="保存/应用" HorizontalAlignment="Left" Margin="220,362,0,0" VerticalAlignment="Top" Width="96" Click="doneBtn1_Click" FontFamily="Microsoft YaHei UI" FontWeight="Normal" Background="#FF008B44" BorderBrush="#FF064D2A" Height="35" FontSize="14" Foreground="White"/>
-                                            <Label Content="启动JVM参数" HorizontalAlignment="Left" Margin="10,312,0,0" VerticalAlignment="Top" Foreground="Black"/>
-                                            <TextBox x:Name="jVMcmd" HorizontalAlignment="Left" Height="23" Margin="119,307,0,0" VerticalAlignment="Top" Width="564" FontFamily="Microsoft YaHei UI" Foreground="Black" Background="{x:Null}" MaxLines="1" AutoWordSelection="True"/>
-                                            <Label Content="提示：一般格式为 -参数，如 -Dlog4j2.formatMsgNoLookups=true，非必要无需填此框" HorizontalAlignment="Left" Margin="119,339,0,0" VerticalAlignment="Top" Background="{x:Null}" Foreground="#FF008B44"/>
-                                            <CheckBox x:Name="useJVMauto" Content="自动选择" HorizontalAlignment="Left" Margin="119,82,0,0" VerticalAlignment="Top" Click="useJVMauto_Click" FontFamily="Microsoft YaHei UI" Width="59"/>
-                                            <CheckBox x:Name="useJVMself" Content="手动选择" HorizontalAlignment="Left" Margin="239,82,0,0" VerticalAlignment="Top" Click="useJVMself_Click" FontFamily="Microsoft YaHei UI"/>
-                                            <TextBox x:Name="jAva" HorizontalAlignment="Left" Height="23" Margin="239,211,0,0" VerticalAlignment="Top" Width="449" FontFamily="Microsoft YaHei UI" Foreground="Black" Background="{x:Null}" MaxLines="1" AutoWordSelection="True"/>
-                                        </Grid>
-                                    </Border>
-                                    <Border BorderBrush="#FF8F8F8F" BorderThickness="1" CornerRadius="8" Margin="10" Background="#FFFFFFFF" Height="153">
-                                        <Grid>
-                                            <Label Content="开服器设置" Foreground="Gray" FontSize="18" Margin="335,0,336,129"/>
-                                            <Button x:Name="setdefault" Content="恢复默认设置" HorizontalAlignment="Left" Margin="85,37,0,0" VerticalAlignment="Top" Width="107" Background="{x:Null}" FontFamily="Microsoft YaHei UI" Height="48" FontSize="12" Click="setdefault_Click" BorderBrush="#FF008042" FontWeight="Normal" Foreground="Black"/>
-                                            <Button x:Name="setnotifyIcon" Content="关闭托盘图标" HorizontalAlignment="Left" Margin="221,37,0,0" VerticalAlignment="Top" Width="101" Background="{x:Null}" FontFamily="Microsoft YaHei UI" Height="48" FontSize="12" BorderBrush="#FF008042" FontWeight="Normal" Foreground="Black"/>
-                                            <Button x:Name="useidea" Content="使用教程" HorizontalAlignment="Left" Margin="351,37,0,0" VerticalAlignment="Top" Width="206" Background="{x:Null}" FontFamily="Microsoft YaHei UI" Height="48" FontSize="14" BorderBrush="#FF008042" FontWeight="Normal" Foreground="Black"/>
-                                        </Grid>
-                                    </Border>
-                                </StackPanel>
-                            </ScrollViewer>
-                        </TabItem>
-                        <TabItem x:Name="frp" Header="&#xA;&#xA;映射" Background="{x:Null}">
-                            <Grid Background="#FFF1F3F8">
-                                <Border BorderBrush="#FF8F8F8F" BorderThickness="1" CornerRadius="8" Margin="10" Background="#FFFFFFFF">
-                                    <Grid>
-                                        <Label x:Name="frplab1" Content="未检测到内网映射配置，请点击 配置 按钮以配置" HorizontalAlignment="Left" Margin="26,27,0,0" VerticalAlignment="Top" FontSize="22" Foreground="Black"/>
-                                        <Button x:Name="setfrpc" Content="配置" HorizontalAlignment="Left" Margin="612,195,0,0" VerticalAlignment="Top" Width="110" Height="51" FontFamily="Microsoft YaHei UI" FontSize="16" Background="{x:Null}" BorderBrush="#FF0068FF" FontWeight="Normal" Foreground="Black" Click="setfrpc_Click"/>
-                                        <Button x:Name="startfrpc" Content="启动内网映射" HorizontalAlignment="Left" Margin="612,300,0,0" VerticalAlignment="Top" Width="110" Height="51" FontFamily="Microsoft YaHei UI" FontSize="16" Background="#FF008B44" BorderBrush="Black" FontWeight="Normal" Foreground="White" IsEnabled="False" Click="startfrpc_Click"/>
-                                        <Label x:Name="frplab2" Content="您的公网IP为：" HorizontalAlignment="Left" Margin="26,87,0,0" VerticalAlignment="Top" FontSize="22" Foreground="Black"/>
-                                        <Label x:Name="frplab3" Content="none" HorizontalAlignment="Left" Margin="193,87,0,0" VerticalAlignment="Top" FontSize="22" Foreground="Black"/>
-                                        <Label Content="注：如果启动映射后出现 端口被占用 的字样时，请重新配置后再试！" HorizontalAlignment="Left" Margin="26,142,0,0" VerticalAlignment="Top" Foreground="Black"/>
-                                        <Label Content="内网映射服务由 初梦 提供&#xA;QQ：483232994" HorizontalAlignment="Left" Margin="612,389,0,0" VerticalAlignment="Top" Foreground="Black"/>
-                                        <TextBox x:Name="frpcOutlog" HorizontalAlignment="Left" Height="256" Margin="10,172,0,0" TextWrapping="Wrap" Text="日志" VerticalAlignment="Top" Width="597" Background="{x:Null}" Foreground="Black" IsReadOnly="True" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Auto" FontFamily="Microsoft YaHei UI"/>
-                                        <Button x:Name="copyFrpc" Content="复制" HorizontalAlignment="Left" FontFamily="Microsoft YaHei UI" FontSize="14"  Margin="612,85,0,0" VerticalAlignment="Top" Width="88" Height="38" BorderBrush="#FF0068FF" Background="{x:Null}" Foreground="Black" FontWeight="Normal" IsEnabled="False" Click="copyFrpc_Click"/>
-                                    </Grid>
-                                </Border>
-                            </Grid>
-                        </TabItem>
-                        <TabItem x:Name="about" Header="&#xA;&#xA;关于" Background="{x:Null}">
-                            <Grid Background="#FFF1F3F8">
-                                <Border BorderBrush="#FF8F8F8F" BorderThickness="1" CornerRadius="8" Margin="10,10,10,310" Background="#FFFFFFFF">
-                                    <Grid>
-                                        <Label Content="关于开服器" Foreground="Gray" FontSize="18" Margin="333,0,334,113"/>
-                                        <Label Content="我的世界开服器2(MSL2) Copyright © 2022 By Waheal&#xA;开服器的成功制作离不开以下人员的帮助及支持：&#xA;xiaoyu——提供服务端下载源          初梦——提供内网映射服务&#xA;前往作者爱发电赞助该软件：http://afdian.net/@makabaka123&#xA;感谢您的支持！" Margin="149,29,10,0" FontSize="16"/>
-                                        <Image Source="我的世界开服器_00001.ico" Margin="19,10,630,0"/>
-                                    </Grid>
-                                </Border>
-                                <Border BorderBrush="#FF8F8F8F" BorderThickness="1" CornerRadius="8" Margin="10,154,10,166" Background="#FFFFFFFF">
-                                    <Grid>
-                                        <Label Content="开源（Github）" Foreground="Gray" FontSize="18" Margin="322,0,312,113"/>
-                                        <Label Content="我的世界开服器2(MSL2) Copyright © 2022 By Waheal&#xA;开服器的成功制作离不开以下人员的帮助及支持：&#xA;xiaoyu——提供服务端下载源          初梦——提供内网映射服务&#xA;前往作者爱发电赞助该软件：http://afdian.net/@makabaka123&#xA;感谢您的支持！" Margin="149,29,10,0" FontSize="16"/>
-                                        <Image Source="github_PNG40.png" Margin="19,10,630,0"/>
-                                    </Grid>
-                                </Border>
-                            </Grid>
-                        </TabItem>
-                    </TabControl>
-                    <Image HorizontalAlignment="Left" Height="30" VerticalAlignment="Top" Width="30" Source="150px-Grass_Block_JE7_BE6.png" Margin="16,10,0,0" IsHitTestVisible="False"/>
-                    <Image HorizontalAlignment="Left" Height="30" VerticalAlignment="Top" Width="30" Source="150px-Enchanted_Book.gif" Margin="16,76,0,0" IsHitTestVisible="False"/>
-                    <Image HorizontalAlignment="Left" Height="30" VerticalAlignment="Top" Width="30" Source="150px-Book_and_Quill.png" Margin="16,138,0,0" IsHitTestVisible="False"/>
-                    <Image HorizontalAlignment="Left" Height="30" VerticalAlignment="Top" Width="30" Source="150px-Lit_Furnace_JE3_BE2.png" Margin="16,200,0,0" IsHitTestVisible="False"/>
-                    <Image HorizontalAlignment="Left" Height="30" VerticalAlignment="Top" Width="30" Source="150px-Anvil.png" Margin="16,262,0,0" IsHitTestVisible="False"/>
-                </Grid>
-            </Grid>
-        </Border>
+        mc:Ignorable="d" Height="500" Width="847" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded" Closing="Window_Closing" StateChanged="Window_StateChanged" Icon="我的世界开服器_00001.ico" Title="我的世界开服器2" Background="#FFF1F3F8">
+    <Grid x:Name="bodyGrid" Grid.Row="1">
+        <ui:NavigationView 
+            IsPaneToggleButtonVisible="True"
+            x:Name="NavView" 
+            IsSettingsVisible="False"
+            OpenPaneLength="152" 
+            CompactPaneLength="48"
+            IsBackButtonVisible="Collapsed" 
+            PaneDisplayMode="LeftCompact"
+            CompactModeThresholdWidth="21600"
+            ExpandedModeThresholdWidth="21600"
+            >
+            <ui:NavigationView.MenuItems>
+                <ui:NavigationViewItem x:Name="homePage" Content="主页" IsSelected="True" MouseLeftButtonUp="homePage_MouseLeftButtonUp">
+                    <ui:NavigationViewItem.Icon>
+                        <ui:BitmapIcon UriSource="150px-Grass_Block_JE7_BE6.png">
+                            <ui:BitmapIcon.Foreground>
+                                <ImageBrush ImageSource="150px-Grass_Block_JE7_BE6.png"/>
+                            </ui:BitmapIcon.Foreground>
+                        </ui:BitmapIcon>
+                    </ui:NavigationViewItem.Icon>
+                </ui:NavigationViewItem>
+                <ui:NavigationViewItem x:Name="outlogPage" Content="服务器输出" MouseLeftButtonUp="outlogPage_MouseLeftButtonUp">
+                    <ui:NavigationViewItem.Icon>
+                        <ui:BitmapIcon UriSource="150px-Enchanted_Book.png">
+                            <ui:BitmapIcon.Foreground>
+                                <ImageBrush ImageSource="150px-Enchanted_Book.png"/>
+                            </ui:BitmapIcon.Foreground>
+                        </ui:BitmapIcon>
+                    </ui:NavigationViewItem.Icon>
+                </ui:NavigationViewItem>
+                <ui:NavigationViewItem x:Name="settingsPage" Content="设置" MouseLeftButtonUp="settingsPage_MouseLeftButtonUp">
+                    <ui:NavigationViewItem.Icon>
+                        <ui:BitmapIcon UriSource="150px-Wooden_Pickaxe_JE3_BE3.png">
+                            <ui:BitmapIcon.Foreground>
+                                <ImageBrush ImageSource="150px-Wooden_Pickaxe_JE3_BE3.png"/>
+                            </ui:BitmapIcon.Foreground>
+                        </ui:BitmapIcon>
+                    </ui:NavigationViewItem.Icon>
+                </ui:NavigationViewItem>
+                <ui:NavigationViewItem x:Name="frpcPage" Content="内网映射" MouseLeftButtonUp="frpcPage_MouseLeftButtonUp">
+                    <ui:NavigationViewItem.Icon>
+                        <ui:BitmapIcon UriSource="150px-Beacon.png">
+                            <ui:BitmapIcon.Foreground>
+                                <ImageBrush ImageSource="150px-Beacon.png"/>
+                            </ui:BitmapIcon.Foreground>
+                        </ui:BitmapIcon>
+                    </ui:NavigationViewItem.Icon>
+                </ui:NavigationViewItem>
+                <ui:NavigationViewItem x:Name="pluginsOrmodsPage" Content="管理插件模组" MouseLeftButtonUp="pluginsOrmodsPage_MouseLeftButtonUp">
+                    <ui:NavigationViewItem.Icon>
+                        <ui:BitmapIcon UriSource="150px-Diamond_Revision_2.png">
+                            <ui:BitmapIcon.Foreground>
+                                <ImageBrush ImageSource="150px-Diamond_Revision_2.png"/>
+                            </ui:BitmapIcon.Foreground>
+                        </ui:BitmapIcon>
+                    </ui:NavigationViewItem.Icon>
+                </ui:NavigationViewItem>
+                <ui:NavigationViewItem x:Name="aboutPage" Content="关于" MouseLeftButtonUp="aboutPage_MouseLeftButtonUp">
+                    <ui:NavigationViewItem.Icon>
+                        <ui:BitmapIcon UriSource="150px-Anvil.png">
+                            <ui:BitmapIcon.Foreground>
+                                <ImageBrush ImageSource="150px-Anvil.png"/>
+                            </ui:BitmapIcon.Foreground>
+                        </ui:BitmapIcon>
+                    </ui:NavigationViewItem.Icon>
+                </ui:NavigationViewItem>
+            </ui:NavigationView.MenuItems>
+            <ui:Frame x:Name="frame" Source="/MSL2;component/pages/Home.xaml" Content="(/pages/Home.xaml)"></ui:Frame>
+        </ui:NavigationView>
     </Grid>
-
 </Window>

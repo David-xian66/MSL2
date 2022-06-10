@@ -55,36 +55,49 @@ namespace MSL2
                     //MessageBox.Show(Url);
                     try
                     {
-                        filename = AppDomain.CurrentDomain.BaseDirectory + @"MSL2\" + autoupdate.Substring(0, autoupdate.IndexOf("（")) + "-" + serverlist1.SelectedItem.ToString() + ".jar";
+                        downloadPath = AppDomain.CurrentDomain.BaseDirectory + @"MSL2";
+                        filename = autoupdate.Substring(0, autoupdate.IndexOf("（")) + "-" + serverlist1.SelectedItem.ToString() + ".jar";
                     }
                     catch
                     {
-                        filename = AppDomain.CurrentDomain.BaseDirectory + @"MSL2\" + autoupdate + serverlist1.SelectedItem.ToString() + ".jar";
+                        downloadPath = AppDomain.CurrentDomain.BaseDirectory + @"MSL2";
+                        filename = autoupdate + serverlist1.SelectedItem.ToString() + ".jar";
                     }
                     downloadurl = domain + serverdownlist.Items[url].ToString();
                     downloadinfo = "下载服务端中……";
                     Window window = new DownloadWindow();
                     window.ShowDialog();
                     //MessageBox.Show(Url,Filename);
-                    downmsg1.Content = "下载成功，已自动为您选择该服务端（默认下载目录为软件运行目录的MSL2文件夹）";
-                    MainWindow.serverserver = "\"" + filename + "\"";
-                    serverlist.IsEnabled = true;
-                    serverlist1.IsEnabled = true;
+                    try
+                    {
+                        MainWindow.serverserver = "\""+ AppDomain.CurrentDomain.BaseDirectory + @"MSL2\" + filename + "\"";
+                        Close();
+                    }
+                    catch
+                    {
+                        Close();
+                    }
                 }
                 else
                 {
                     int url = serverlist1.SelectedIndex;
                     //string filename = serverlist.SelectedItem.ToString();
                     downloadurl = serverdownlist.Items[url].ToString();
-                    filename = AppDomain.CurrentDomain.BaseDirectory + @"MSL2\" + serverlist.SelectedItem.ToString() + "-" + serverlist1.SelectedItem.ToString() + ".jar";
+                    downloadPath = AppDomain.CurrentDomain.BaseDirectory + @"MSL2";
+                    filename = serverlist.SelectedItem.ToString() + "-" + serverlist1.SelectedItem.ToString() + ".jar";
                     downloadinfo = "下载服务端中……";
                     Window window = new DownloadWindow();
                     window.ShowDialog();
                     //MessageBox.Show(Url,Filename);
-                    downmsg1.Content = "下载成功，已自动为您选择该服务端（默认下载目录为软件运行目录的MSL2文件夹）";
-                    MainWindow.serverserver = "\"" + filename + "\"";
-                    serverlist.IsEnabled = true;
-                    serverlist1.IsEnabled = true;
+                    try
+                    {
+                        MainWindow.serverserver = "\""+ AppDomain.CurrentDomain.BaseDirectory + @"MSL2\" + filename + "\"";
+                        Close();
+                    }
+                    catch
+                    {
+                        Close();
+                    }
                 }
             }
         }
@@ -94,7 +107,7 @@ namespace MSL2
             {
                 WebClient MyWebClient1 = new WebClient();
                 MyWebClient1.Credentials = CredentialCache.DefaultCredentials;
-                byte[] pageData1 = MyWebClient1.DownloadData("http://115.220.5.81:8081/web/getserver.txt");
+                byte[] pageData1 = MyWebClient1.DownloadData("http://106.12.157.82/web/getserver.txt");
                 string pageHtml1 = Encoding.UTF8.GetString(pageData1);
 
                 int IndexofA0 = pageHtml1.IndexOf("*");
@@ -141,6 +154,14 @@ namespace MSL2
                         }
                         so1.Close();
                         st1.Close();
+                        this.Dispatcher.Invoke(DispatcherPriority.Normal, (ThreadStart)delegate ()
+                        {
+                            if (serverlist.SelectedIndex == -1)
+                            {
+                                serverlist.SelectedIndex = 0;
+                                getservermsg.Visibility = Visibility.Hidden;
+                            }
+                        });
                         int IndexofA3 = pageHtml1.IndexOf("|");
                         string Ru3 = pageHtml1.Substring(IndexofA3 + 1);
                         pageHtml1 = Ru3;
@@ -262,7 +283,7 @@ namespace MSL2
                 //MessageBox.Show(serverlist.SelectedItem.ToString());
                 string abc = serverlist.SelectedItem.ToString();
                 JObject jsonObject1 = (JObject)jsonObject[abc];
-                updatetime.Content = "最新下载源更新时间";
+                updatetime.Content = "最新下载源更新时间："+"\n无";
                 serverlist1.Items.Clear();
                 serverdownlist.Items.Clear();
                 foreach (var x in jsonObject1)

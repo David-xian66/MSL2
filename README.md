@@ -6,10 +6,10 @@
   
 # Minecraft Server Start 2（MSL2）
 
-<a href="https://github.com/Waheal/MSL2/blob/master/LICENSE"><img alt="GitHub license" src="https://img.shields.io/github/license/Waheal/MSL"></a>
-<a href="https://github.com/Waheal/MSL2/issues"><img alt="GitHub issues" src="https://img.shields.io/github/issues/Waheal/MSL"></a>
-<a href="https://github.com/Waheal/MSL2/stargazers"><img alt="GitHub stars" src="https://img.shields.io/github/stars/Waheal/MSL"></a>
-<a href="https://github.com/Waheal/MSL2/network"><img alt="GitHub forks" src="https://img.shields.io/github/forks/Waheal/MSL"></a>
+<a href="https://github.com/Waheal/MSL2/blob/master/LICENSE"><img alt="GitHub license" src="https://img.shields.io/github/license/Waheal/MSL2"></a>
+<a href="https://github.com/Waheal/MSL2/issues"><img alt="GitHub issues" src="https://img.shields.io/github/issues/Waheal/MSL2"></a>
+<a href="https://github.com/Waheal/MSL2/stargazers"><img alt="GitHub stars" src="https://img.shields.io/github/stars/Waheal/MSL2"></a>
+<a href="https://github.com/Waheal/MSL2/network"><img alt="GitHub forks" src="https://img.shields.io/github/forks/Waheal/MSL2"></a>
  
 我的世界开服器2
   

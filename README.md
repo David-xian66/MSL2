@@ -4,7 +4,7 @@
 
 <div align="center">
   
-# Minecraft Server Start 2（MSL2）
+# Minecraft Server Launcher 2 （MSL2）
 
 <a href="https://github.com/Waheal/MSL2/blob/master/LICENSE"><img alt="GitHub license" src="https://img.shields.io/github/license/Waheal/MSL2"></a>
 <a href="https://github.com/Waheal/MSL2/issues"><img alt="GitHub issues" src="https://img.shields.io/github/issues/Waheal/MSL2"></a>

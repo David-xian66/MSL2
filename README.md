@@ -12,7 +12,7 @@
 <a href="https://github.com/Waheal/MSL2/network"><img alt="GitHub forks" src="https://img.shields.io/github/forks/Waheal/MSL2"></a>
 <a href="https://github.com/Waheal/MSL2/network"><img alt="system" src="https://img.shields.io/badge/适用平台-Windows-critical"></a>
  
-我的世界开服器2
+我的世界开服器 2
   
 重新出发，美观实用
 

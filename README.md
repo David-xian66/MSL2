@@ -10,6 +10,7 @@
 <a href="https://github.com/Waheal/MSL2/issues"><img alt="GitHub issues" src="https://img.shields.io/github/issues/Waheal/MSL2"></a>
 <a href="https://github.com/Waheal/MSL2/stargazers"><img alt="GitHub stars" src="https://img.shields.io/github/stars/Waheal/MSL2"></a>
 <a href="https://github.com/Waheal/MSL2/network"><img alt="GitHub forks" src="https://img.shields.io/github/forks/Waheal/MSL2"></a>
+<a href="https://github.com/Waheal/MSL2/network"><img alt="system" src="https://img.shields.io/badge/适用平台-Windows-critical"></a>
  
 我的世界开服器2
   
